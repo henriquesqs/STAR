@@ -1,18 +1,20 @@
 import React from 'react';
-import { Text, View, Button, StyleSheet } from 'react-native';
+import { Text, StyleSheet, TouchableOpacity } from 'react-native';
 
-const OurButton = () => {
+import styles from "./styles";
+
+const Button = (props) => {
+  // We can use fontsLoaded to only load this component when
+  // the font is loaded
+  // let [fontsLoaded] = useFonts({
+  //   Roboto_400Regular,
+  // });
+
   return (
-    <Button title="CONNECTED BABY" style={styles.button} />
+    <TouchableOpacity style={styles.button}>
+      <Text style={styles.text}>{props.title}</Text>
+    </TouchableOpacity>
   );
 }
 
-const styles = StyleSheet.create({
-  button: {
-    backgroundColor: "blue",
-    height: '15%',
-    width: '15%',
-  }
-});
-
-export default OurButton;
+export default Button;
