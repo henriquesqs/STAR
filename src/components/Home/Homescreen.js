@@ -54,7 +54,7 @@ const Homescreen = ({ navigation }) => {
 
           <View style={styles.imagesIcons}>
             <Image
-              style={{ width: 20, height: 33 }}
+              style={{ width: 20, height: 34 }}
               source={require("../../../assets/icons/phone.png")} />
             <Image
               style={{ width: 36, height: 24 }}
