@@ -24,17 +24,15 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     fontSize: 16,
-
   },
   imagesIcons: {
     flex: 0.5,
     width: 300,
     height: 100,
-    marginTop: 300,
+    marginTop: 200,
     flexDirection: "row",
     justifyContent: "space-around",
-    alignItems: "center",
-
+    alignItems: "flex-end",
   },
   textContent: {
     width: "100%",

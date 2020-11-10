@@ -24,7 +24,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     fontSize: 16,
-
   },
   imagesIcons: {
     flex: 0.5,
@@ -33,8 +32,7 @@ const styles = StyleSheet.create({
     marginTop: 300,
     flexDirection: "row",
     justifyContent: "space-around",
-    alignItems: "center",
-
+    alignItems: "flex-end",
   },
   textContent: {
     width: "100%",
@@ -44,7 +42,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   pageTitle: {
-    marginTop: 350,
+    marginTop: 200,
     fontSize: 100,
     color: 'purple',
     fontFamily: "Roboto_700Bold",
@@ -57,6 +55,12 @@ const styles = StyleSheet.create({
     textAlign: "center",
     lineHeight: 40,
   },
+  backButton: {
+    marginTop: 90,
+    width: 40,
+    height: 50,
+    left: -130
+  }
 
 });
 

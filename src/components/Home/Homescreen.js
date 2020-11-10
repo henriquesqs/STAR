@@ -1,7 +1,7 @@
 import React from 'react';
 import { AppLoading } from "expo";
 import { View, Text, Image } from 'react-native';
-import Button from "../Button/Button.js";
+import NewButton from "../Button/NewButton.js";
 import OutlineButton from "../OutlineButton/OutlineButton.js";
 import {
   useFonts,
@@ -70,7 +70,7 @@ const Homescreen = ({ navigation }) => {
         </View>
 
         <View style={styles.containerButtons}>
-          <Button title="CONNECT" />
+          <NewButton title="CONNECT" />
           <OutlineButton title="SOBRE" onPress={() => navigation.navigate('About')} />
         </View>
       </View>
