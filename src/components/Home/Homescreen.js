@@ -3,40 +3,9 @@ import { View, Text, TouchableOpacity, Image } from 'react-native';
 import Button from "../Button/Button.js";
 import OutlineButton from "../OutlineButton/OutlineButton.js";
 
-import {
-  useFonts,
-  Roboto_100Thin,
-  Roboto_100Thin_Italic,
-  Roboto_300Light,
-  Roboto_300Light_Italic,
-  Roboto_400Regular,
-  Roboto_400Regular_Italic,
-  Roboto_500Medium,
-  Roboto_500Medium_Italic,
-  Roboto_700Bold,
-  Roboto_700Bold_Italic,
-  Roboto_900Black,
-  Roboto_900Black_Italic,
-} from '@expo-google-fonts/roboto';
-
 import styles from "./styles";
 
 const Homescreen = ({ navigation }) => {
-
-  let [fontsLoaded] = useFonts({
-    Roboto_100Thin,
-    Roboto_100Thin_Italic,
-    Roboto_300Light,
-    Roboto_300Light_Italic,
-    Roboto_400Regular,
-    Roboto_400Regular_Italic,
-    Roboto_500Medium,
-    Roboto_500Medium_Italic,
-    Roboto_700Bold,
-    Roboto_700Bold_Italic,
-    Roboto_900Black,
-    Roboto_900Black_Italic,
-  });
 
   return (
     <View style={styles.containerPrincipal}>
@@ -50,17 +19,17 @@ const Homescreen = ({ navigation }) => {
 
         <View style={styles.imagesIcons}>
           <Image
-            style={{ width: 54, height: 66 }}
-            source={require("../../../assets/icons/security.svg")} />
+            style={{ width: 20, height: 33 }}
+            source={require("../../../assets/icons/phone.png")} />
           <Image
-            style={{ width: 39, height: 66 }}
-            source={require("../../../assets/icons/phone.svg")} />
+            style={{ width: 36, height: 24 }}
+            source={require("../../../assets/icons/computer.png")} />
           <Image
-            style={{ width: 72, height: 48 }}
-            source={require("../../../assets/icons/computer.svg")} />
+            style={{ width: 41, height: 32 }}
+            source={require("../../../assets/icons/home.png")} />
           <Image
-            style={{ width: 81, height: 63 }}
-            source={require("../../../assets/icons/home.svg")} />
+            style={{ width: 27, height: 33 }}
+            source={require("../../../assets/icons/security.png")} />
         </View>
 
       </View>
