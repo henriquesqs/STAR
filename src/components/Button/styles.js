@@ -3,8 +3,8 @@ import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
   button: {
     backgroundColor: "purple",
-    width: 150,
-    height: 100,
+    width: 120,
+    height: 90,
     borderRadius: 10,
     borderWidth: 5,
     borderColor: "purple",

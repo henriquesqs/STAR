@@ -3,7 +3,7 @@ import { Text, StyleSheet, TouchableOpacity } from 'react-native';
 
 import styles from "./styles";
 
-const Button = (props) => {
+const NewButton = (props) => {
   // We can use fontsLoaded to only load this component when
   // the font is loaded
   // let [fontsLoaded] = useFonts({
@@ -17,4 +17,4 @@ const Button = (props) => {
   );
 }
 
-export default Button;
+export default NewButton;
