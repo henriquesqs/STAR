@@ -38,7 +38,7 @@ const Aboutscreen = ({ navigation }) => {
       </View>
 
       <View style={styles.containerButtons}>
-        <OutlineButton title="CONNECT" onPress={() => navigation.navigate('Home')} />
+        <OutlineButton title="CONNECT" onPress={() => navigation.navigate('Connect')} />
         <NewButton title="SOBRE" />
       </View>
     </View>

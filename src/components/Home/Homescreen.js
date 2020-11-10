@@ -70,7 +70,7 @@ const Homescreen = ({ navigation }) => {
         </View>
 
         <View style={styles.containerButtons}>
-          <NewButton title="CONNECT" />
+          <NewButton title="CONNECT" onPress={() => navigation.navigate('Connect')}/>
           <OutlineButton title="SOBRE" onPress={() => navigation.navigate('About')} />
         </View>
       </View>
