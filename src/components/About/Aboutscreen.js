@@ -1,22 +1,40 @@
 import React from 'react';
-import { View,Text , TouchableOpacity, Image } from 'react-native';
+import { View, Text, TouchableOpacity, Image } from 'react-native';
+import OutlineButton from "../OutlineButton/OutlineButton.js";
 import Button from "../Button/Button.js";
-//import Icon1 from "../../assets/icons/svg/002-cellular.svg";
 import styles from "./styles";
 
-const Aboutscreen = () => {
+const Aboutscreen = ({ navigation }) => {
   return (
-    
     <View style={styles.containerPrincipal}>
+
       <View style={styles.containerContent}>
+
         <View style={styles.textContent}>
-          <Text style={{fontSize: 25}}>Bom dia florzinha</Text>
+          <Text style={styles.pageTitle}>v1.0</Text>
+          <Text style={styles.pageSubTitle}>Made by Team 2</Text>
         </View>
+
+        <View style={styles.imagesIcons}>
+          <Image
+            style={{ width: 20, height: 33 }}
+            source={require("../../../assets/icons/phone.png")} />
+          <Image
+            style={{ width: 36, height: 24 }}
+            source={require("../../../assets/icons/computer.png")} />
+          <Image
+            style={{ width: 41, height: 32 }}
+            source={require("../../../assets/icons/home.png")} />
+          <Image
+            style={{ width: 27, height: 33 }}
+            source={require("../../../assets/icons/security.png")} />
+        </View>
+
       </View>
-      
+
       <View style={styles.containerButtons}>
-        <Button title="Herro"/>
-        <Button title="Corno"/>
+        <OutlineButton title="CONNECT" onPress={() => navigation.navigate('Home')} />
+        <Button title="SOBRE" />
       </View>
     </View>
   );

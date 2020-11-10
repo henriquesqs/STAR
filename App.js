@@ -1,7 +1,5 @@
 import 'react-native-gesture-handler';
 import * as React from 'react';
-import { Text, View, StyleSheet } from 'react-native';
-import Button from "./src/components/Button/Button.js";
 
 import Homescreen from "./src/components/Home/Homescreen.js";
 import Aboutscreen from "./src/components/About/Aboutscreen.js";
