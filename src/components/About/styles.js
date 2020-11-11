@@ -7,15 +7,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: "white",
   },
-  containerButtons: {
-    backgroundColor: "white",
-    width: "80%",
-    height: "100%",
-    flex: 0.5,
-    flexDirection: "row",
-    justifyContent: "space-around",
-    alignItems: "center"
-  },
   containerContent: {
     width: "100%",
     flex: 0.5,
@@ -25,11 +16,19 @@ const styles = StyleSheet.create({
     alignItems: "center",
     fontSize: 16,
   },
-  imagesIcons: {
+  containerButtons: {
+    backgroundColor: "white",
+    width: "80%",
+    height: "100%",
     flex: 0.5,
+    flexDirection: "row",
+    justifyContent: "space-around",
+    alignItems: "center"
+  },
+  imagesIcons: {
+    flex: 0.3,
     width: 300,
-    height: 100,
-    marginTop: 300,
+    // marginTop: 300,
     flexDirection: "row",
     justifyContent: "space-around",
     alignItems: "flex-end",
@@ -42,7 +41,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   pageTitle: {
-    marginTop: 200,
+    // marginTop: 200,
     fontSize: 100,
     color: 'purple',
     fontFamily: "Roboto_700Bold",
@@ -56,10 +55,11 @@ const styles = StyleSheet.create({
     lineHeight: 40,
   },
   backButton: {
-    marginTop: 90,
+    marginTop: '15%',
     width: 40,
     height: 50,
-    left: -130
+    left: -130,
+    flex: 0.3,
   }
 
 });

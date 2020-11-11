@@ -15,6 +15,7 @@ const Aboutscreen = ({ navigation }) => {
             style={{ width: 25, height: 24, marginTop: 15, left: 6 }}
             source={require("../../../assets/icons/back.png")} />
         </TouchableOpacity>
+
         <View style={styles.textContent}>
           <Text style={styles.pageTitle}>v1.0</Text>
           <Text style={styles.pageSubTitle}>Made by Team 2</Text>
@@ -39,7 +40,7 @@ const Aboutscreen = ({ navigation }) => {
 
       <View style={styles.containerButtons}>
         <OutlineButton title="CONNECT" onPress={() => navigation.navigate('Connect')} />
-        <NewButton title="SOBRE" />
+        <NewButton title="ABOUT" />
       </View>
     </View>
   );
