@@ -3,7 +3,7 @@ import { Text, StyleSheet, TouchableOpacity } from 'react-native';
 
 import styles from "./styles";
 
-const NewButton = (props) => {
+const CircularButton = (props) => {
 
   return (
     <TouchableOpacity
@@ -33,4 +33,4 @@ const NewButton = (props) => {
   );
 }
 
-export default NewButton;
+export default CircularButton;

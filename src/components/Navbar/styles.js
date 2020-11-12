@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around',
     width: '100%',
-    backgroundColor: 'purple',
+    backgroundColor: '#454ADE',
     marginTop: '7.3%',
   },
   contentTexts: {
@@ -27,12 +27,6 @@ const styles = StyleSheet.create({
     fontFamily: 'Roboto_400Regular',
     fontSize: 14,
     color: 'white',
-  },
-  principal: {
-    flex: 1,
-    flexDirection: "column",
-    alignItems: "center",
-    backgroundColor: "white",
   }
 });
 

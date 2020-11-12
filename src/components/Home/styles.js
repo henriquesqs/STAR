@@ -44,13 +44,13 @@ const styles = StyleSheet.create({
   pageTitle: {
     marginTop: 350,
     fontSize: 100,
-    color: 'purple',
+    color: '#454ADE',
     fontFamily: "Roboto_700Bold",
   },
   pageSubTitle: {
     width: 300,
     fontSize: 39,
-    color: 'purple',
+    color: '#454ADE',
     fontFamily: 'Roboto_500Medium',
     textAlign: "center",
     lineHeight: 40,

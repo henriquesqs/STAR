@@ -1,4 +1,4 @@
-import React from 'react';
+expandableimport React from 'react';
 import { AppLoading } from "expo";
 import { View, Text, Image } from 'react-native';
 import NewButton from "../Button/NewButton.js";
@@ -70,7 +70,16 @@ const Homescreen = ({ navigation }) => {
         </View>
 
         <View style={styles.containerButtons}>
-          <NewButton title="CONNECT" onPress={() => navigation.navigate('Connect')} />
+          <NewButton
+            bgColor={"#454ADE"}
+            width={120}
+            height={90}
+            bRadius={10}
+            title="CONNECT"
+            txtColor='white'
+            txtSize={17}
+            marginTop={'25%'}
+            onPress={() => navigation.navigate('Connect')} />
           <OutlineButton title="ABOUT" onPress={() => navigation.navigate('About')} />
         </View>
       </View>

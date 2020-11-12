@@ -5,8 +5,11 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "column",
     alignItems: "center",
-    backgroundColor: "white",
-  }
+    // justifyContent: 'space-between',
+    // top: 50,
+    // marginBottom: 300,
+    backgroundColor: 'white',
+  },
 });
 
 export default styles;

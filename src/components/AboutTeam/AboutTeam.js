@@ -23,8 +23,8 @@ import Navbar from '../Navbar/Navbar';
 const AboutTeam = (props) => {
   return (
     <>
+      <Navbar title="About us" description="Informations about this app" />
       <View style={styles.containerContent}>
-        <Navbar title="About us" description="Informations about this app" />
         <Text>about?</Text>
       </View>
     </>

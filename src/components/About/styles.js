@@ -43,13 +43,13 @@ const styles = StyleSheet.create({
   pageTitle: {
     // marginTop: 200,
     fontSize: 100,
-    color: 'purple',
+    color: '#454ADE',
     fontFamily: "Roboto_700Bold",
   },
   pageSubTitle: {
     width: 300,
     fontSize: 39,
-    color: 'purple',
+    color: '#454ADE',
     fontFamily: 'Roboto_500Medium',
     textAlign: "center",
     lineHeight: 40,
@@ -60,6 +60,13 @@ const styles = StyleSheet.create({
     height: 50,
     left: -130,
     flex: 0.3,
+  },
+  backArrow: {
+    width: 25,
+    height: 24,
+    marginTop: 15,
+    left: 6,
+    tintColor: '#454ADE'
   }
 
 });

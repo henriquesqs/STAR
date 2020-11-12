@@ -12,7 +12,7 @@ const Aboutscreen = ({ navigation }) => {
 
         <TouchableOpacity style={styles.backButton} title="arrowIcon" onPress={() => navigation.navigate('Home')}>
           <Image
-            style={{ width: 25, height: 24, marginTop: 15, left: 6 }}
+            style={styles.backArrow}
             source={require("../../../assets/icons/back.png")} />
         </TouchableOpacity>
 
@@ -39,8 +39,20 @@ const Aboutscreen = ({ navigation }) => {
       </View>
 
       <View style={styles.containerButtons}>
-        <OutlineButton title="CONNECT" onPress={() => navigation.navigate('Connect')} />
-        <NewButton title="ABOUT" />
+        <OutlineButton
+          title="CONNECT"
+          onPress={() => navigation.navigate('Connect')}
+        />
+        <NewButton
+          bgColor={"#454ADE"}
+          width={120}
+          height={90}
+          bRadius={10}
+          txtColor='white'
+          txtSize={17}
+          marginTop={'25%'}
+          title="ABOUT"
+        />
       </View>
     </View>
   );

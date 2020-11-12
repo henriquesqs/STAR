@@ -7,10 +7,10 @@ const styles = StyleSheet.create({
     height: 90,
     borderRadius: 10,
     borderWidth: 2,
-    borderColor: "purple",
+    borderColor: "#454ADE",
   },
   text: {
-    color: "purple",
+    color: "#454ADE",
     fontSize: 17,
     marginTop: "25%",
     textAlign: "center",

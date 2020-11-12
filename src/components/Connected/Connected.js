@@ -72,22 +72,22 @@ export default function Connected() {
               return <Image
                 source={iconName}
                 style={{
-                  tintColor: focused ? "white" : '#858383',
+                  tintColor: focused ? "white" : '#A2A1A1',
                   height: height,
                   width: width,
                   resizeMode: 'contain',
                 }}
               />;
-            },            
+            },
           })}
           tabBarOptions={{
             style: { height: 85 },
             labelStyle: { fontSize: 15, paddingBottom: 10 },
             activeTintColor: 'white',
-            inactiveTintColor: '#858383',
-            activeBackgroundColor: 'purple',
-            inactiveBackgroundColor: 'purple'
-          }}          
+            inactiveTintColor: '#A2A1A1',
+            activeBackgroundColor: '#454ADE',
+            inactiveBackgroundColor: '#454ADE'
+          }}
         >
           <Tab.Screen name="DEVICES" component={Devices} />
           <Tab.Screen name="ABOUT" component={AboutTeam} />
