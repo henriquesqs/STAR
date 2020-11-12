@@ -1,4 +1,4 @@
-expandableimport React from 'react';
+import React from 'react';
 import { AppLoading } from "expo";
 import { View, Text, Image } from 'react-native';
 import NewButton from "../Button/NewButton.js";
