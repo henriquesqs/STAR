@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Roboto_500Medium',
   },
   stateMode: {
-    fontSize: 15,
+    fontSize: 13,
     color: '#9949C8',
     fontFamily: 'Roboto_500Medium',
   },
