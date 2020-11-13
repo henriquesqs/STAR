@@ -13,8 +13,8 @@ import styles from "./styles.js";
 
 const DevicesOptionsFocused = (props) => {
 
-  const [deviceState, setDeviceState] = useState('LIGADO');
-  const [deviceStateButtonText, setDeviceStateButtonText] = useState('DESLIGADO');
+  const [deviceState, setDeviceState] = useState('ON');
+  const [deviceStateButtonText, setDeviceStateButtonText] = useState('OFF');
 
   const [minTemp, setMinTemp] = useState(16);
   const [minTempDecButtonColor, setMinTempDecButtonColor] = useState('gray')
@@ -28,8 +28,8 @@ const DevicesOptionsFocused = (props) => {
   const [currentTempDecButtonColor, setCurrentTempDecButtonColor] = useState('#454ADE')
   const [currentTempIncButtonColor, setCurrentTempIncButtonColor] = useState('#454ADE')
 
-  const [noPeople, setNoPeople] = useState('LIGADO');
-  const [noPeopleButtonText, setNoPeopleButtonText] = useState('DESLIGADO');
+  const [noPeople, setNoPeople] = useState('ON');
+  const [noPeopleButtonText, setNoPeopleButtonText] = useState('OFF');
 
   const [timeout, setTimeout] = useState(10);
   const [timeoutDecButtonColor, setTimeoutDecButtonColor] = useState('#454ADE')
@@ -37,24 +37,24 @@ const DevicesOptionsFocused = (props) => {
 
   // This function handles clicks on NoPeople button
   function handleNoPeople() {
-    if (noPeople == 'LIGADO') {
-      setNoPeople('DESLIGADO');
+    if (noPeople == 'ON') {
+      setNoPeople('OFF');
       setNoPeopleButtonText('LIGAR');
     }
     else {
-      setNoPeople('LIGADO');
+      setNoPeople('ON');
       setNoPeopleButtonText('DESLIGAR');
     }
   }
 
   // This function handles clicks on Power Button
   function handleSetState() {
-    if (deviceState == 'LIGADO') {
-      setDeviceState('DESLIGADO');
+    if (deviceState == 'ON') {
+      setDeviceState('OFF');
       setDeviceStateButtonText('LIGAR');
     }
     else {
-      setDeviceState('LIGADO');
+      setDeviceState('ON');
       setDeviceStateButtonText('DESLIGAR');
     }
   }
@@ -211,7 +211,7 @@ const DevicesOptionsFocused = (props) => {
     <View style={styles.focused}>
 
       <View style={styles.cardSubtitle}>
-        <Text style={styles.sub}>DADOS ATUAIS DO DISPOSITIVO</Text>
+        <Text style={styles.sub}>CURRENT INFO FROM DEVICE</Text>
       </View>
 
       <View style={styles.cardFirstIcon}>
@@ -222,7 +222,7 @@ const DevicesOptionsFocused = (props) => {
           style={{ resizeMode: 'contain', width: 50, height: 45 }}
         />
         <View style={{ flexDirection: 'column', left: -25 }}>
-          <Text style={styles.state}>ESTADO:</Text>
+          <Text style={styles.state}>STATE:</Text>
           <Text style={styles.stateMode}>{deviceState}</Text>
         </View>
         <View style={{}}>
@@ -251,7 +251,7 @@ const DevicesOptionsFocused = (props) => {
         />
 
         <View style={{ flexDirection: 'column', left: -20 }}>
-          <Text style={styles.state}>TEMP. MIN:</Text>
+          <Text style={styles.state}>MIN TEMP.:</Text>
           <Text style={styles.stateMode}>{minTemp}ºC</Text>
         </View>
 
@@ -297,7 +297,7 @@ const DevicesOptionsFocused = (props) => {
           style={{ resizeMode: 'contain', width: 50, height: 45 }}
         />
         <View style={{ flexDirection: 'column', left: -15 }}>
-          <Text style={styles.state}>TEMP. MAX:</Text>
+          <Text style={styles.state}>MAX TEMP.:</Text>
           <Text style={styles.stateMode}>{maxTemp}ºC</Text>
         </View>
         <View style={{ flexDirection: 'row', width: '25%', }}>
@@ -338,7 +338,7 @@ const DevicesOptionsFocused = (props) => {
           style={{ resizeMode: 'contain', width: 50, height: 45 }}
         />
         <View style={{ flexDirection: 'column', left: -15 }}>
-          <Text style={styles.state}>TEMP. ATUAL:</Text>
+          <Text style={styles.state}>TEMP. NOW:</Text>
           <Text style={styles.stateMode}>{currentTemp}ºC</Text>
         </View>
         <View style={{ flexDirection: 'row', width: '25%', }}>
@@ -379,7 +379,7 @@ const DevicesOptionsFocused = (props) => {
           style={{ resizeMode: 'contain', width: 50, height: 45 }}
         />
         <View style={{ flexDirection: 'column', left: -3 }}>
-          <Text style={styles.state}>AO ESVAZIAR:</Text>
+          <Text style={styles.state}>W/ NOBODY:</Text>
           <Text style={styles.stateMode}>{noPeople}</Text>
         </View>
         <View style={{}}>
@@ -405,8 +405,8 @@ const DevicesOptionsFocused = (props) => {
           height={0}
           style={{ resizeMode: 'contain', width: 50, height: 45, left: -10 }}
         />
-        <View style={{ flexDirection: 'column', left: -35 }}>
-          <Text style={styles.state}>ESPERA:</Text>
+        <View style={{ flexDirection: 'column', left: -20 }}>
+          <Text style={styles.state}>TIMEOUT:</Text>
           <Text style={styles.stateMode}>{timeout} min</Text>
         </View>
         <View style={{ flexDirection: 'row', width: '25%', }}>

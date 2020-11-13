@@ -20,7 +20,7 @@ import {
 import styles from "./styles.js";
 import Navbar from '../Navbar/Navbar';
 
-const AboutTeam = (props) => {
+const AboutTeam = (props, { navigation }) => {
   return (
     <>
       <Navbar title="About us" description="Informations about this app" />
