@@ -13,6 +13,7 @@ import styles from "./styles.js";
 
 const DevicesOptionsFocused = (props) => {
 
+  const [iconsColor, setIconsColors] = useState('white');
   const [deviceState, setDeviceState] = useState('ON');
   const [deviceStateButtonText, setDeviceStateButtonText] = useState('OFF');
 
@@ -30,20 +31,25 @@ const DevicesOptionsFocused = (props) => {
 
   const [noPeople, setNoPeople] = useState('ON');
   const [noPeopleButtonText, setNoPeopleButtonText] = useState('OFF');
+  const [noPeopleButtonColor, setNoPeopleButtonColor] = useState('#454ADE');
 
   const [timeout, setTimeout] = useState(10);
   const [timeoutDecButtonColor, setTimeoutDecButtonColor] = useState('#454ADE')
   const [timeoutIncButtonColor, setTimeoutIncButtonColor] = useState('#454ADE')
 
+  const textColor = {
+    color: iconsColor,
+  };
+
   // This function handles clicks on NoPeople button
   function handleNoPeople() {
     if (noPeople == 'ON') {
       setNoPeople('OFF');
-      setNoPeopleButtonText('LIGAR');
+      setNoPeopleButtonText('TURN ON');
     }
     else {
       setNoPeople('ON');
-      setNoPeopleButtonText('DESLIGAR');
+      setNoPeopleButtonText('TURN OFF');
     }
   }
 
@@ -51,13 +57,34 @@ const DevicesOptionsFocused = (props) => {
   function handleSetState() {
     if (deviceState == 'ON') {
       setDeviceState('OFF');
-      setDeviceStateButtonText('LIGAR');
+      setIconsColors('gray');
+      setDeviceStateButtonText('TURN ON');
+      setMinTempDecButtonColor('gray');
+      setMinTempIncButtonColor('gray');
+      setMaxTempDecButtonColor('gray');
+      setMaxTempIncButtonColor('gray');
+      setCurrentTempDecButtonColor('gray');
+      setCurrentTempIncButtonColor('gray');
+      setTimeoutDecButtonColor('gray');
+      setTimeoutIncButtonColor('gray');
+      setNoPeopleButtonColor('gray');
     }
     else {
       setDeviceState('ON');
-      setDeviceStateButtonText('DESLIGAR');
+      setIconsColors('white');
+      setDeviceStateButtonText('TURN OFF');
+      setMinTempDecButtonColor('#454ADE');
+      setMinTempIncButtonColor('#454ADE');
+      setMaxTempDecButtonColor('#454ADE');
+      setMaxTempIncButtonColor('#454ADE');
+      setCurrentTempDecButtonColor('#454ADE');
+      setCurrentTempIncButtonColor('#454ADE');
+      setTimeoutDecButtonColor('#454ADE');
+      setTimeoutIncButtonColor('#454ADE');
+      setNoPeopleButtonColor('#454ADE');
     }
   }
+
 
   // This function handles clicks on Decrease Min Temp button
   // It checks wheter user can continue to decrease the MinTemp value or not
@@ -247,11 +274,11 @@ const DevicesOptionsFocused = (props) => {
           source={LowTempIcon}
           width={0}
           height={0}
-          style={{ resizeMode: 'contain', width: 50, height: 45 }}
+          style={{ resizeMode: 'contain', width: 50, height: 45, tintColor: iconsColor }}
         />
 
         <View style={{ flexDirection: 'column', left: -20 }}>
-          <Text style={styles.state}>MIN TEMP.:</Text>
+          <Text style={[styles.state, textColor]}>MIN TEMP.:</Text>
           <Text style={styles.stateMode}>{minTemp}ºC</Text>
         </View>
 
@@ -294,10 +321,10 @@ const DevicesOptionsFocused = (props) => {
           source={HighTempIcon}
           width={0}
           height={0}
-          style={{ resizeMode: 'contain', width: 50, height: 45 }}
+          style={{ resizeMode: 'contain', width: 50, height: 45, tintColor: iconsColor }}
         />
         <View style={{ flexDirection: 'column', left: -15 }}>
-          <Text style={styles.state}>MAX TEMP.:</Text>
+          <Text style={[styles.state, textColor]}>MAX TEMP.:</Text>
           <Text style={styles.stateMode}>{maxTemp}ºC</Text>
         </View>
         <View style={{ flexDirection: 'row', width: '25%', }}>
@@ -335,10 +362,10 @@ const DevicesOptionsFocused = (props) => {
           source={TempNowIcon}
           width={0}
           height={0}
-          style={{ resizeMode: 'contain', width: 50, height: 45 }}
+          style={{ resizeMode: 'contain', width: 50, height: 45, tintColor: iconsColor }}
         />
         <View style={{ flexDirection: 'column', left: -15 }}>
-          <Text style={styles.state}>TEMP. NOW:</Text>
+          <Text style={[styles.state, textColor]}>TEMP. NOW:</Text>
           <Text style={styles.stateMode}>{currentTemp}ºC</Text>
         </View>
         <View style={{ flexDirection: 'row', width: '25%', }}>
@@ -376,10 +403,10 @@ const DevicesOptionsFocused = (props) => {
           source={NoPeopleIcon}
           width={0}
           height={0}
-          style={{ resizeMode: 'contain', width: 50, height: 45 }}
+          style={{ resizeMode: 'contain', width: 50, height: 45, tintColor: iconsColor }}
         />
         <View style={{ flexDirection: 'column', left: -3 }}>
-          <Text style={styles.state}>W/ NOBODY:</Text>
+          <Text style={[styles.state, textColor]}>W/ NOBODY:</Text>
           <Text style={styles.stateMode}>{noPeople}</Text>
         </View>
         <View style={{}}>
@@ -387,7 +414,7 @@ const DevicesOptionsFocused = (props) => {
             onPress={handleNoPeople}
             width={100}
             height={50}
-            bgColor={'#454ADE'}
+            bgColor={noPeopleButtonColor}
             bRadius={10}
             title={noPeopleButtonText}
             txtColor='white'
@@ -403,10 +430,10 @@ const DevicesOptionsFocused = (props) => {
           source={ClockIcon}
           width={0}
           height={0}
-          style={{ resizeMode: 'contain', width: 50, height: 45, left: -10 }}
+          style={{ resizeMode: 'contain', width: 50, height: 45, left: -10, tintColor: iconsColor }}
         />
         <View style={{ flexDirection: 'column', left: -20 }}>
-          <Text style={styles.state}>TIMEOUT:</Text>
+          <Text style={[styles.state, textColor]}>TIMEOUT:</Text>
           <Text style={styles.stateMode}>{timeout} min</Text>
         </View>
         <View style={{ flexDirection: 'row', width: '25%', }}>
