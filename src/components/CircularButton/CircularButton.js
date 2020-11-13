@@ -1,7 +1,5 @@
 import React from 'react';
-import { Text, StyleSheet, TouchableOpacity } from 'react-native';
-
-import styles from "./styles";
+import { Text, TouchableOpacity } from 'react-native';
 
 const CircularButton = (props) => {
 

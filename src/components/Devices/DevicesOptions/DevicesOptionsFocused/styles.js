@@ -19,11 +19,6 @@ const styles = StyleSheet.create({
     color: 'white',
     fontFamily: 'Roboto_500Medium',
   },
-  cardFirstIcon: {
-    flexDirection: "row",
-    backgroundColor: '#1B1F3B',
-    flex: 0.15,
-  },
   state: {
     fontSize: 18,
     color: 'white',
@@ -34,25 +29,35 @@ const styles = StyleSheet.create({
     color: '#9949C8',
     fontFamily: 'Roboto_500Medium',
   },
+  cardFirstIcon: {
+    flexDirection: "row",
+    backgroundColor: '#1B1F3B',
+    flex: 0.15,
+    justifyContent: "space-around",
+  },
   cardSecondIcon: {
     flexDirection: "row",
     backgroundColor: '#1B1F3B',
     flex: 0.15,
+    justifyContent: "space-around",
   },
   cardThirdIcon: {
     flexDirection: "row",
     backgroundColor: '#1B1F3B',
     flex: 0.15,
+    justifyContent: "space-around",
   },
   cardFourthIcon: {
     flexDirection: "row",
     backgroundColor: '#1B1F3B',
     flex: 0.15,
+    justifyContent: "space-around",
   },
   cardFifthIcon: {
     flexDirection: "row",
     backgroundColor: '#1B1F3B',
     flex: 0.15,
+    justifyContent: "space-around",
   },
   cardSixthIcon: {
     flexDirection: "row",
@@ -60,6 +65,7 @@ const styles = StyleSheet.create({
     flex: 0.15,
     borderBottomRightRadius: 20,
     borderBottomLeftRadius: 20,
+    justifyContent: "space-around",
   },
 });
 
