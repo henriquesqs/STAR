@@ -15,11 +15,6 @@ const CircularButton = (props) => {
       }}
       onPress={props.onPress}
     >
-      {/* color: "white",
-    // fontSize: 17,
-    // marginTop: "25%",
-    textAlign: "center",
-    fontWeight: 'bold' */}
       <Text
         style={{
           color: props.txtColor,
@@ -31,6 +26,7 @@ const CircularButton = (props) => {
       >{props.title}</Text>
     </TouchableOpacity>
   );
+
 }
 
 export default CircularButton;
