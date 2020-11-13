@@ -17,7 +17,7 @@ const DevicesOptionsFocused = (props) => {
   const [deviceStateButtonText, setDeviceStateButtonText] = useState('DESLIGADO');
 
   const [minTemp, setMinTemp] = useState(16);
-  const [minTempDecButtonColor, setMinTempDecButtonColor] = useState('#454ADE')
+  const [minTempDecButtonColor, setMinTempDecButtonColor] = useState('gray')
   const [minTempIncButtonColor, setMinTempIncButtonColor] = useState('#454ADE')
 
   const [maxTemp, setMaxTemp] = useState(18);
@@ -113,8 +113,8 @@ const DevicesOptionsFocused = (props) => {
     }
     else {
       setMaxTempDecButtonColor('#454ADE');
-      if (minTemp < 22) {
-        setMinTempIncButtonColor('#454ADE');
+      if (maxTemp <= 22) {
+        setMaxTempIncButtonColor('#454ADE');
       }
     }
   }
