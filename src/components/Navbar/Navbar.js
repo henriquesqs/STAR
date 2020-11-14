@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, Image } from 'react-native';
+import { Text, View, TouchableOpacity, Image } from 'react-native';
 import BackArrow from "../../../assets/icons/back.png"
 import {
   useFonts,
@@ -19,11 +19,11 @@ import {
 
 import styles from "./styles.js";
 
-const Navbar = (props) => {
+const Navbar = (props, {navigation}) => {
   return (
     <View style={styles.navbar}>
-      <View style={styles.backImage}>
-        <Image source={BackArrow}
+      <TouchableOpacity style={styles.backButton} title="arrowIcon" onPress={() => navigation.navigate('Home')}>
+        <Image
           style={{
             width: 25,
             height: 24,
@@ -32,8 +32,9 @@ const Navbar = (props) => {
             top: 0,
             tintColor: 'white'
           }}
-        />
-      </View>
+          source={require("../../../assets/icons/back.png")} />
+      </TouchableOpacity>
+
       <View style={styles.contentTexts}>
         <Text style={styles.pageTitle}>{props.title}</Text>
         <Text style={styles.subTitle}>{props.description}</Text>
