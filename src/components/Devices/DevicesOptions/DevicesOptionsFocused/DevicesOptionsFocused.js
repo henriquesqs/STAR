@@ -13,8 +13,9 @@ import styles from "./styles.js";
 
 const DevicesOptionsFocused = (props) => {
 
-  const [deviceState, setDeviceState] = useState('LIGADO');
-  const [deviceStateButtonText, setDeviceStateButtonText] = useState('DESLIGADO');
+  const [iconsColor, setIconsColors] = useState('white');
+  const [deviceState, setDeviceState] = useState('ON');
+  const [deviceStateButtonText, setDeviceStateButtonText] = useState('OFF');
 
   const [minTemp, setMinTemp] = useState(16);
   const [minTempDecButtonColor, setMinTempDecButtonColor] = useState('gray')
@@ -28,36 +29,62 @@ const DevicesOptionsFocused = (props) => {
   const [currentTempDecButtonColor, setCurrentTempDecButtonColor] = useState('#454ADE')
   const [currentTempIncButtonColor, setCurrentTempIncButtonColor] = useState('#454ADE')
 
-  const [noPeople, setNoPeople] = useState('LIGADO');
-  const [noPeopleButtonText, setNoPeopleButtonText] = useState('DESLIGADO');
+  const [noPeople, setNoPeople] = useState('ON');
+  const [noPeopleButtonText, setNoPeopleButtonText] = useState('OFF');
+  const [noPeopleButtonColor, setNoPeopleButtonColor] = useState('#454ADE');
 
   const [timeout, setTimeout] = useState(10);
   const [timeoutDecButtonColor, setTimeoutDecButtonColor] = useState('#454ADE')
   const [timeoutIncButtonColor, setTimeoutIncButtonColor] = useState('#454ADE')
 
+  const textColor = {
+    color: iconsColor,
+  };
+
   // This function handles clicks on NoPeople button
   function handleNoPeople() {
-    if (noPeople == 'LIGADO') {
-      setNoPeople('DESLIGADO');
-      setNoPeopleButtonText('LIGAR');
+    if (noPeople == 'ON') {
+      setNoPeople('OFF');
+      setNoPeopleButtonText('TURN ON');
     }
     else {
-      setNoPeople('LIGADO');
-      setNoPeopleButtonText('DESLIGAR');
+      setNoPeople('ON');
+      setNoPeopleButtonText('TURN OFF');
     }
   }
 
   // This function handles clicks on Power Button
   function handleSetState() {
-    if (deviceState == 'LIGADO') {
-      setDeviceState('DESLIGADO');
-      setDeviceStateButtonText('LIGAR');
+    if (deviceState == 'ON') {
+      setDeviceState('OFF');
+      setIconsColors('gray');
+      setDeviceStateButtonText('TURN ON');
+      setMinTempDecButtonColor('gray');
+      setMinTempIncButtonColor('gray');
+      setMaxTempDecButtonColor('gray');
+      setMaxTempIncButtonColor('gray');
+      setCurrentTempDecButtonColor('gray');
+      setCurrentTempIncButtonColor('gray');
+      setTimeoutDecButtonColor('gray');
+      setTimeoutIncButtonColor('gray');
+      setNoPeopleButtonColor('gray');
     }
     else {
-      setDeviceState('LIGADO');
-      setDeviceStateButtonText('DESLIGAR');
+      setDeviceState('ON');
+      setIconsColors('white');
+      setDeviceStateButtonText('TURN OFF');
+      setMinTempDecButtonColor('#454ADE');
+      setMinTempIncButtonColor('#454ADE');
+      setMaxTempDecButtonColor('#454ADE');
+      setMaxTempIncButtonColor('#454ADE');
+      setCurrentTempDecButtonColor('#454ADE');
+      setCurrentTempIncButtonColor('#454ADE');
+      setTimeoutDecButtonColor('#454ADE');
+      setTimeoutIncButtonColor('#454ADE');
+      setNoPeopleButtonColor('#454ADE');
     }
   }
+
 
   // This function handles clicks on Decrease Min Temp button
   // It checks wheter user can continue to decrease the MinTemp value or not
@@ -211,21 +238,21 @@ const DevicesOptionsFocused = (props) => {
     <View style={styles.focused}>
 
       <View style={styles.cardSubtitle}>
-        <Text style={styles.sub}>DADOS ATUAIS DO DISPOSITIVO</Text>
+        <Text style={styles.sub}>CURRENT INFO FROM DEVICE</Text>
       </View>
 
       <View style={styles.cardFirstIcon}>
         <Image
           source={PowerIcon}
           width={0}
-          height={30}
-          style={{ resizeMode: 'contain', width: 100, height: 45 }}
+          height={0}
+          style={{ resizeMode: 'contain', width: 50, height: 45 }}
         />
-        <View style={{ flexDirection: 'column', left: -15 }}>
-          <Text style={styles.state}>ESTADO:</Text>
+        <View style={{ flexDirection: 'column', left: -25 }}>
+          <Text style={styles.state}>STATE:</Text>
           <Text style={styles.stateMode}>{deviceState}</Text>
         </View>
-        <View style={{ left: 60 }}>
+        <View style={{}}>
           <NewButton
             onPress={handleSetState}
             width={100}
@@ -242,29 +269,38 @@ const DevicesOptionsFocused = (props) => {
       </View>
 
       <View style={styles.cardSecondIcon}>
+
         <Image
           source={LowTempIcon}
           width={0}
-          height={30}
-          style={{ resizeMode: 'contain', width: 100, height: 45 }}
+          height={0}
+          style={{ resizeMode: 'contain', width: 50, height: 45, tintColor: iconsColor }}
         />
-        <View style={{ flexDirection: 'column', left: -15 }}>
-          <Text style={styles.state}>TEMP. MIN:</Text>
+
+        <View style={{ flexDirection: 'column', left: -20 }}>
+          <Text style={[styles.state, textColor]}>MIN TEMP.:</Text>
           <Text style={styles.stateMode}>{minTemp}ºC</Text>
         </View>
-        <View style={{ left: 35, flexDirection: 'row' }}>
-          <CircularButton
-            onPress={() => { handleIncreaseMinTemp() }}
-            width={45}
-            height={45}
-            bgColor={minTempIncButtonColor}
-            bRadius={100}
-            title="+"
-            txtColor='white'
-            txtSize={30}
-            marginTop={'5%'}
-          />
-          <View style={{ left: 15 }}>
+
+        <View style={{
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+          width: '25%',
+        }}>
+          <View style={{ left: -13 }}>
+            <CircularButton
+              onPress={handleIncreaseMinTemp}
+              width={45}
+              height={45}
+              bgColor={minTempIncButtonColor}
+              bRadius={100}
+              title="+"
+              txtColor='white'
+              txtSize={30}
+              marginTop={'5%'}
+            />
+          </View>
+          <View style={{ left: -5 }}>
             <CircularButton
               onPress={handleDecreaseMinTemp}
               width={45}
@@ -284,26 +320,28 @@ const DevicesOptionsFocused = (props) => {
         <Image
           source={HighTempIcon}
           width={0}
-          height={30}
-          style={{ resizeMode: 'contain', width: 100, height: 45 }}
+          height={0}
+          style={{ resizeMode: 'contain', width: 50, height: 45, tintColor: iconsColor }}
         />
         <View style={{ flexDirection: 'column', left: -15 }}>
-          <Text style={styles.state}>TEMP. MAX:</Text>
+          <Text style={[styles.state, textColor]}>MAX TEMP.:</Text>
           <Text style={styles.stateMode}>{maxTemp}ºC</Text>
         </View>
-        <View style={{ left: 30, flexDirection: 'row' }}>
-          <CircularButton
-            onPress={handleIncreaseMaxTemp}
-            width={45}
-            height={45}
-            bgColor={maxTempIncButtonColor}
-            bRadius={100}
-            title="+"
-            txtColor='white'
-            txtSize={30}
-            marginTop={'5%'}
-          />
-          <View style={{ left: 15 }}>
+        <View style={{ flexDirection: 'row', width: '25%', }}>
+          <View style={{ left: -13 }}>
+            <CircularButton
+              onPress={handleIncreaseMaxTemp}
+              width={45}
+              height={45}
+              bgColor={maxTempIncButtonColor}
+              bRadius={100}
+              title="+"
+              txtColor='white'
+              txtSize={30}
+              marginTop={'5%'}
+            />
+          </View>
+          <View style={{ left: -5 }}>
             <CircularButton
               onPress={handleDecreaseMaxTemp}
               width={45}
@@ -323,26 +361,28 @@ const DevicesOptionsFocused = (props) => {
         <Image
           source={TempNowIcon}
           width={0}
-          height={30}
-          style={{ resizeMode: 'contain', width: 100, height: 45 }}
+          height={0}
+          style={{ resizeMode: 'contain', width: 50, height: 45, tintColor: iconsColor }}
         />
         <View style={{ flexDirection: 'column', left: -15 }}>
-          <Text style={styles.state}>TEMP. ATUAL:</Text>
+          <Text style={[styles.state, textColor]}>TEMP. NOW:</Text>
           <Text style={styles.stateMode}>{currentTemp}ºC</Text>
         </View>
-        <View style={{ left: 15, flexDirection: 'row' }}>
-          <CircularButton
-            onPress={handleIncreaseCurrentTemp}
-            width={45}
-            height={45}
-            bgColor={currentTempIncButtonColor}
-            bRadius={100}
-            title="+"
-            txtColor='white'
-            txtSize={30}
-            marginTop={'5%'}
-          />
-          <View style={{ left: 15 }}>
+        <View style={{ flexDirection: 'row', width: '25%', }}>
+          <View style={{ left: -13 }}>
+            <CircularButton
+              onPress={handleIncreaseCurrentTemp}
+              width={45}
+              height={45}
+              bgColor={currentTempIncButtonColor}
+              bRadius={100}
+              title="+"
+              txtColor='white'
+              txtSize={30}
+              marginTop={'5%'}
+            />
+          </View>
+          <View style={{ left: -5 }}>
             <CircularButton
               onPress={handleDecreaseCurrentTemp}
               width={45}
@@ -362,19 +402,19 @@ const DevicesOptionsFocused = (props) => {
         <Image
           source={NoPeopleIcon}
           width={0}
-          height={30}
-          style={{ resizeMode: 'contain', width: 100, height: 45 }}
+          height={0}
+          style={{ resizeMode: 'contain', width: 50, height: 45, tintColor: iconsColor }}
         />
-        <View style={{ flexDirection: 'column', left: -15 }}>
-          <Text style={styles.state}>AO ESVAZIAR:</Text>
+        <View style={{ flexDirection: 'column', left: -3 }}>
+          <Text style={[styles.state, textColor]}>W/ NOBODY:</Text>
           <Text style={styles.stateMode}>{noPeople}</Text>
         </View>
-        <View style={{ left: 15 }}>
+        <View style={{}}>
           <NewButton
             onPress={handleNoPeople}
             width={100}
             height={50}
-            bgColor={'#454ADE'}
+            bgColor={noPeopleButtonColor}
             bRadius={10}
             title={noPeopleButtonText}
             txtColor='white'
@@ -389,26 +429,28 @@ const DevicesOptionsFocused = (props) => {
         <Image
           source={ClockIcon}
           width={0}
-          height={30}
-          style={{ resizeMode: 'contain', width: 90, height: 45 }}
+          height={0}
+          style={{ resizeMode: 'contain', width: 50, height: 45, left: -10, tintColor: iconsColor }}
         />
-        <View style={{ flexDirection: 'column', left: -15 }}>
-          <Text style={styles.state}>ESPERA:</Text>
+        <View style={{ flexDirection: 'column', left: -20 }}>
+          <Text style={[styles.state, textColor]}>TIMEOUT:</Text>
           <Text style={styles.stateMode}>{timeout} min</Text>
         </View>
-        <View style={{ left: 65, flexDirection: 'row' }}>
-          <CircularButton
-            onPress={handleIncreaseTimeout}
-            width={45}
-            height={45}
-            bgColor={timeoutIncButtonColor}
-            bRadius={100}
-            title="+"
-            txtColor='white'
-            txtSize={30}
-            marginTop={'5%'}
-          />
-          <View style={{ left: 15 }}>
+        <View style={{ flexDirection: 'row', width: '25%', }}>
+          <View style={{ left: -5 }}>
+            <CircularButton
+              onPress={handleIncreaseTimeout}
+              width={45}
+              height={45}
+              bgColor={timeoutIncButtonColor}
+              bRadius={100}
+              title="+"
+              txtColor='white'
+              txtSize={30}
+              marginTop={'5%'}
+            />
+          </View>
+          <View style={{ left: 3 }}>
             <CircularButton
               onPress={handleDecreaseTimeout}
               width={45}

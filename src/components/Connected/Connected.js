@@ -1,8 +1,6 @@
 import * as React from 'react';
 import { AppLoading } from "expo";
-import { Button, Text, View, Image } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+import { Image } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import DevicesWhite from "../../../assets/icons/devices.png";
@@ -51,48 +49,46 @@ export default function Connected() {
   }
   else {
     return (
-      <NavigationContainer independent={true} style={{ height: 300 }}>
-        <Tab.Navigator
-          screenOptions={({ route }) => ({
-            tabBarIcon: ({ focused, color, size }) => {
-              let iconName, height, width;
+      <Tab.Navigator
+        screenOptions={({ route }) => ({
+          tabBarIcon: ({ focused, color, size }) => {
+            let iconName, height, width;
 
-              if (route.name === 'DEVICES') {
-                iconName = DevicesWhite;
-                height = 20;
-                width = 33;
-              }
+            if (route.name === 'DEVICES') {
+              iconName = DevicesWhite;
+              height = 20;
+              width = 33;
+            }
 
-              else if (route.name === 'ABOUT') {
-                iconName = AlertGray;
-                height = 25;
-                width = 33;
-              }
+            else if (route.name === 'ABOUT') {
+              iconName = AlertGray;
+              height = 25;
+              width = 33;
+            }
 
-              return <Image
-                source={iconName}
-                style={{
-                  tintColor: focused ? "white" : '#A2A1A1',
-                  height: height,
-                  width: width,
-                  resizeMode: 'contain',
-                }}
-              />;
-            },
-          })}
-          tabBarOptions={{
-            style: { height: 85 },
-            labelStyle: { fontSize: 15, paddingBottom: 10 },
-            activeTintColor: 'white',
-            inactiveTintColor: '#A2A1A1',
-            activeBackgroundColor: '#454ADE',
-            inactiveBackgroundColor: '#454ADE'
-          }}
-        >
-          <Tab.Screen name="DEVICES" component={Devices} />
-          <Tab.Screen name="ABOUT" component={AboutTeam} />
-        </Tab.Navigator>
-      </NavigationContainer>
+            return <Image
+              source={iconName}
+              style={{
+                tintColor: focused ? "white" : '#A2A1A1',
+                height: height,
+                width: width,
+                resizeMode: 'contain',
+              }}
+            />;
+          },
+        })}
+        tabBarOptions={{
+          style: { height: 85 },
+          labelStyle: { fontSize: 15, paddingBottom: 10 },
+          activeTintColor: 'white',
+          inactiveTintColor: '#A2A1A1',
+          activeBackgroundColor: '#454ADE',
+          inactiveBackgroundColor: '#454ADE'
+        }}
+      >
+        <Tab.Screen name="DEVICES" component={Devices} />
+        <Tab.Screen name="ABOUT" component={AboutTeam} />
+      </Tab.Navigator>
     );
   }
 }

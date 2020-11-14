@@ -8,7 +8,7 @@ import DevicesOptionsFocused from "./DevicesOptions/DevicesOptionsFocused/Device
 
 import styles from "./styles.js";
 
-const Devices = () => {
+const Devices = ({ navigation }) => {
 
   const [secondTop, setSecondTop] = useState(50);
   const [firstFlex, setFirstFlex] = useState(0.15);
@@ -60,6 +60,7 @@ const Devices = () => {
       <Navbar
         title="Devices"
         description="Select a device to see it status"
+        nav={navigation}
       />
       <View style={styles.containerContent}>
         <TouchableOpacity
@@ -67,7 +68,7 @@ const Devices = () => {
           onPress={focusFirstDevicesOptions}
         >
           <DevicesOptions
-            title="AR CONDICIONADO"
+            title="CONDITIONED AIR"
             iconWidth={40}
             iconHeight={37}
             icon={Air}
@@ -80,7 +81,7 @@ const Devices = () => {
           onPress={focusSecondDevicesOptions}
         >
           <DevicesOptions
-            title="SENSORES"
+            title="SENSORS"
             iconWidth={50}
             iconHeight={40}
             icon={Sensor}
