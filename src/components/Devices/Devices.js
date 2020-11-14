@@ -68,7 +68,7 @@ const Devices = ({ navigation }) => {
           onPress={focusFirstDevicesOptions}
         >
           <DevicesOptions
-            title="CONDITIONED AIR"
+            title="AIR CONDITIONER"
             iconWidth={40}
             iconHeight={37}
             icon={Air}

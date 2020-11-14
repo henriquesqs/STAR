@@ -433,7 +433,7 @@ const DevicesOptionsFocused = (props) => {
           style={{ resizeMode: 'contain', width: 50, height: 45, left: -10, tintColor: iconsColor }}
         />
         <View style={{ flexDirection: 'column', left: -20 }}>
-          <Text style={[styles.state, textColor]}>TIMEOUT:</Text>
+          <Text style={[styles.state, textColor]}>WAIT TIME:</Text>
           <Text style={styles.stateMode}>{timeout} min</Text>
         </View>
         <View style={{ flexDirection: 'row', width: '25%', }}>
