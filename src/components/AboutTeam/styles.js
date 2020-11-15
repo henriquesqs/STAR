@@ -14,6 +14,7 @@ const styles = StyleSheet.create({
     flex: 0.15,
     width: '85%',
     top: 30,
+    marginBottom: 30,
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
@@ -76,17 +77,18 @@ const styles = StyleSheet.create({
   authorsInfoName: {
     paddingLeft: 30,
     marginTop: 2,
-    marginBottom: -8,
+    marginBottom: -5,
     fontFamily: 'Roboto_500Medium',
-    fontSize: 19,
+    fontSize: 17,
     fontWeight: 'bold',
     color: 'white',
   },
   authorsInfoUsp: {
     paddingLeft: 30,
     fontFamily: 'Roboto_500Medium',
-    fontSize: 19,
+    fontSize: 15,
     color: 'white',
+    opacity: 0.5,
     marginBottom: 10,
   }
 });
