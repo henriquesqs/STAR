@@ -1,4 +1,5 @@
 # IOT App project
+Made with React Native
 
 ## Requisites
 - Install node
