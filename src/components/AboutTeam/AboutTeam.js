@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Text, View, TouchableOpacity, Image, ViewPagerAndroidBase } from 'react-native';
+import { Text, View, TouchableOpacity, Image, ViewPagerAndroidBase, ScrollView } from 'react-native';
 import BackArrow from "../../../assets/icons/back.png"
 import People from "../../../assets/icons/people.png";
 import {
@@ -21,25 +21,12 @@ import {
 import styles from "./styles.js";
 import Navbar from '../Navbar/Navbar';
 
-const AboutTeam = (props) => {
+const AboutTeam = ({ navigation }) => {
 
   const [isAuthorsFocused, setisAuthorsFocused] = useState(false);
 
   function focusAuthors() {
-
     setisAuthorsFocused(!isAuthorsFocused);
-
-    if (!isAuthorsFocused) {
-      // setFirstFlex(0.75);
-      //  setSecondFlex(0);
-      // setSecondDisplay('none');
-    }
-    else {
-      // styles.authors.flex = 0.15,
-      // setFirstFlex(0.15);
-      // setSecondFlex(0.15);
-      // setSecondDisplay('flex');
-    }
   }
 
   return (
@@ -47,8 +34,10 @@ const AboutTeam = (props) => {
       <Navbar
         title="About us"
         description="Informations about this app"
+        nav={navigation}
       />
       <View style={styles.containerContent}>
+        
         <TouchableOpacity style={isAuthorsFocused? styles.authorsTitleFocused : styles.authors} onPress={focusAuthors}>
           <Image source={require('../../../assets/icons/people.png')}
             style={{
@@ -63,28 +52,64 @@ const AboutTeam = (props) => {
               resizeMode: 'contain',
             }}
           />
-          <Text style={styles.authorsButton }>CRIADORES</Text>
+          <Text style={styles.authorsButton}>AUTHORS</Text>
 
         </TouchableOpacity>
         {isAuthorsFocused && (
-            <View style={styles.authorsFocused}>
-              <Text style={styles.authorsInfoTitleMain}>BACKEND</Text>
-              <Text style={styles.authorsInfoName}>PESSOA 1</Text>
-              <Text style={styles.authorsInfoUsp}>NUSP 00000000</Text>
-              <Text style={styles.authorsInfoName}>PESSOA 2</Text>
-              <Text style={styles.authorsInfoUsp}>NUSP 00000000</Text>
-              <Text style={styles.authorsInfoName}>PESSOA 3</Text>
-              <Text style={styles.authorsInfoUsp}>NUSP 00000000</Text>
-              <Text style={styles.authorsInfoTitle}>FRONTEND</Text>
-              <Text style={styles.authorsInfoName}>PESSOA 1</Text>
-              <Text style={styles.authorsInfoUsp}>NUSP 00000000</Text>
-              <Text style={styles.authorsInfoName}>PESSOA 2</Text>
-              <Text style={styles.authorsInfoUsp}>NUSP 00000000</Text>
-              <Text style={styles.authorsInfoName}>PESSOA 3</Text>
-              <Text style={styles.authorsInfoUsp}>NUSP 00000000</Text>
-            </View>
+          <View style={styles.authorsFocused}>
+          <ScrollView>            
             
-          )}
+            <Text style={styles.authorsInfoTitle}>BACK-END</Text>
+            <Text style={styles.authorsInfoName}>PESSOA 1</Text>
+            <Text style={styles.authorsInfoUsp}>NUSP 00000000</Text>
+            <Text style={styles.authorsInfoName}>PESSOA 2</Text>
+            <Text style={styles.authorsInfoUsp}>NUSP 00000000</Text>
+            <Text style={styles.authorsInfoName}>PESSOA 3</Text>
+            <Text style={styles.authorsInfoUsp}>NUSP 00000000</Text>
+
+            <Text style={styles.authorsInfoTitleMain}>BROKER</Text>
+            <Text style={styles.authorsInfoName}>PESSOA 1</Text>
+            <Text style={styles.authorsInfoUsp}>NUSP 00000000</Text>
+            <Text style={styles.authorsInfoName}>PESSOA 2</Text>
+            <Text style={styles.authorsInfoUsp}>NUSP 00000000</Text>
+            <Text style={styles.authorsInfoName}>PESSOA 3</Text>
+            <Text style={styles.authorsInfoUsp}>NUSP 00000000</Text>
+
+            <Text style={styles.authorsInfoTitleMain}>DATABASES</Text>
+            <Text style={styles.authorsInfoName}>PESSOA 1</Text>
+            <Text style={styles.authorsInfoUsp}>NUSP 00000000</Text>
+            <Text style={styles.authorsInfoName}>PESSOA 2</Text>
+            <Text style={styles.authorsInfoUsp}>NUSP 00000000</Text>
+            <Text style={styles.authorsInfoName}>PESSOA 3</Text>
+            <Text style={styles.authorsInfoUsp}>NUSP 00000000</Text>
+
+            <Text style={styles.authorsInfoTitleMain}>FRONT-END</Text>
+            <Text style={styles.authorsInfoName}>PESSOA 1</Text>
+            <Text style={styles.authorsInfoUsp}>NUSP 00000000</Text>
+            <Text style={styles.authorsInfoName}>PESSOA 2</Text>
+            <Text style={styles.authorsInfoUsp}>NUSP 00000000</Text>
+            <Text style={styles.authorsInfoName}>PESSOA 3</Text>
+            <Text style={styles.authorsInfoUsp}>NUSP 00000000</Text>
+
+            <Text style={styles.authorsInfoTitle}>MICRO-SERVICES</Text>
+            <Text style={styles.authorsInfoName}>PESSOA 1</Text>
+            <Text style={styles.authorsInfoUsp}>NUSP 00000000</Text>
+            <Text style={styles.authorsInfoName}>PESSOA 2</Text>
+            <Text style={styles.authorsInfoUsp}>NUSP 00000000</Text>
+            <Text style={styles.authorsInfoName}>PESSOA 3</Text>
+            <Text style={styles.authorsInfoUsp}>NUSP 00000000</Text>
+
+            <Text style={styles.authorsInfoTitle}>SECURITY</Text>
+            <Text style={styles.authorsInfoName}>PESSOA 1</Text>
+            <Text style={styles.authorsInfoUsp}>NUSP 00000000</Text>
+            <Text style={styles.authorsInfoName}>PESSOA 2</Text>
+            <Text style={styles.authorsInfoUsp}>NUSP 00000000</Text>
+            <Text style={styles.authorsInfoName}>PESSOA 3</Text>
+            <Text style={styles.authorsInfoUsp}>NUSP 00000000</Text>
+          </ScrollView>
+          </View>
+          
+        )}
       </View>
     </>
   );
