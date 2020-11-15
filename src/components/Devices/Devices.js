@@ -24,7 +24,6 @@ const Devices = ({ navigation }) => {
     setisFirstFocused(!isFirstFocused);
 
     if (!isFirstFocused) {
-      // setFirstFlex(0.75);
       setSecondFlex(0);
       setSecondDisplay('none');
     }
@@ -36,23 +35,7 @@ const Devices = ({ navigation }) => {
   }
 
   function focusSecondDevicesOptions() {
-
-    alert("Em breve!");
-    // setisSecondFocused(!isSecondFocused);
-
-    // if (!isSecondFocused) {
-    //   // setSecondFlex(0.7);
-    //   setFirstFlex(0);
-    //   setFirstDisplay('none');
-    //   setSecondTop(30);
-    // }
-
-    // else {
-    //   setFirstFlex(0.15);
-    //   setSecondFlex(0.15);
-    //   setFirstDisplay('flex');
-    //   setSecondTop(50);
-    // }
+    alert("Coming soon! :)");
   }
 
   return (
