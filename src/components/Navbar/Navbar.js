@@ -4,8 +4,13 @@ import { Text, View, Image } from 'react-native';
 import BackArrow from "../../../assets/icons/back.png"
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
+// A simple Navbar that holds an arrow icon to go back to Home screen,
+// a title and a subtitle for the current screen
 const Navbar = (props) => {
 
+  // If user touch on arrow icon, we're going to disconnect the user
+  // from the app/device and send this user to Home screen.
+  // We're showing an alert to the user
   function handleBackButton(nav) {
     alert('You have been disconnected from this device!');
     nav.navigate("Home");

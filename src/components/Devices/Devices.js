@@ -1,6 +1,6 @@
-import React, { useState, SyntheticEvent } from 'react';
+import React, { useState } from 'react';
 import Navbar from '../Navbar/Navbar';
-import { View, TouchableOpacity, TouchableWithoutFeedback } from 'react-native';
+import { View, TouchableOpacity } from 'react-native';
 import DevicesOptions from "./DevicesOptions/DevicesOptions.js";
 import Air from "../../../assets/icons/air.png";
 import Sensor from "../../../assets/icons/sensor.png";
@@ -8,6 +8,12 @@ import DevicesOptionsFocused from "./DevicesOptions/DevicesOptionsFocused/Device
 
 import styles from "./styles.js";
 
+// This devices returns the two main functions of our app:
+// A component, DeviceOptions, that holds all options that
+// user will be able to choose in order to control the
+// air conditioner functions.
+// And the same component, DeviceOptions, that holds all
+// the information returned from the sensors we are connected to.
 const Devices = ({ navigation }) => {
 
   const [secondTop, setSecondTop] = useState(50);
@@ -17,8 +23,11 @@ const Devices = ({ navigation }) => {
   const [secondDisplay, setSecondDisplay] = useState('flex');
 
   const [isFirstFocused, setisFirstFocused] = useState(false);
-  const [isSecondFocused, setisSecondFocused] = useState(false);
+  // const [isSecondFocused, setisSecondFocused] = useState(false);
 
+  // This function handles the touch in DevicesOptions component
+  // and changes the flex from the first/second component depending
+  // on which component is pressed
   function focusFirstDevicesOptions() {
 
     setisFirstFocused(!isFirstFocused);
@@ -79,13 +88,6 @@ const Devices = ({ navigation }) => {
             icon={Air}></DevicesOptionsFocused>
           : null
         }
-        {/* {isSecondFocused ?
-          <DevicesOptionsFocused title="SENSOR"
-            iconWidth={40}
-            iconHeight={37}
-            icon={Sensor}></DevicesOptionsFocused>
-          : null
-        } */}
       </View>
     </>
   );

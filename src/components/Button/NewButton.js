@@ -1,8 +1,7 @@
 import React from 'react';
-import { Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { Text, TouchableOpacity } from 'react-native';
 
-import styles from "./styles";
-
+// This is a Button that we've created for better custommizing it
 const NewButton = (props) => {
 
   return (
@@ -15,11 +14,6 @@ const NewButton = (props) => {
       }}
       onPress={props.onPress}
     >
-      {/* color: "white",
-    // fontSize: 17,
-    // marginTop: "25%",
-    textAlign: "center",
-    fontWeight: 'bold' */}
       <Text
         style={{
           color: props.txtColor,

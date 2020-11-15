@@ -21,6 +21,11 @@ import {
 
 import styles from "./styles";
 
+// This component will control our main page. 
+// When our app loads, the first page our user is going
+// to see is returned from this component. 
+// It receives a prop, navigation, that can handle
+// navigation between screens.
 const Homescreen = ({ navigation }) => {
 
   let [fontsLoaded] = useFonts({
@@ -38,6 +43,7 @@ const Homescreen = ({ navigation }) => {
     Roboto_900Black_Italic,
   });
 
+  // Wait until all the fonts are loaded
   if (!fontsLoaded) {
     return <AppLoading />;
   }
@@ -47,11 +53,13 @@ const Homescreen = ({ navigation }) => {
 
         <View style={styles.containerContent}>
 
+          {/* Main text content of Home page */}
           <View style={styles.textContent}>
             <Text style={styles.pageTitle}>NAME</Text>
             <Text style={styles.pageSubTitle}>solutions based on IOT</Text>
           </View>
 
+          {/* 4 images icons which represents main focus of IOT apps */}
           <View style={styles.imagesIcons}>
             <Image
               style={{ width: 20, height: 34 }}
@@ -69,7 +77,10 @@ const Homescreen = ({ navigation }) => {
 
         </View>
 
+        {/* Container that holds the two main buttons */}
         <View style={styles.containerButtons}>
+          {/* When pressed, this first button sends the user 
+          to "Connected" component/page */}
           <NewButton
             bgColor={"#454ADE"}
             width={120}
@@ -80,6 +91,8 @@ const Homescreen = ({ navigation }) => {
             txtSize={17}
             marginTop={'25%'}
             onPress={() => navigation.navigate('Connect')} />
+          {/* When pressed, this second button sends the user 
+          to "About" component/page */}
           <OutlineButton title="ABOUT" onPress={() => navigation.navigate('About')} />
         </View>
       </View>

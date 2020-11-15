@@ -4,12 +4,15 @@ import OutlineButton from "../OutlineButton/OutlineButton.js";
 import NewButton from "../Button/NewButton.js";
 import styles from "./styles";
 
+// This component controls the About Screen page
+// Here we are going to return some basic information about
+// this app, such as version and the team who developed it.
 const Aboutscreen = ({ navigation }) => {
   return (
     <View style={styles.containerPrincipal}>
-
       <View style={styles.containerContent}>
-
+        {/* This button, an arrow icon, will return the user to Homescreen
+        when pressed */}
         <TouchableOpacity style={styles.backButton} title="arrowIcon" onPress={() => navigation.navigate('Home')}>
           <Image
             style={styles.backArrow}
@@ -21,6 +24,7 @@ const Aboutscreen = ({ navigation }) => {
           <Text style={styles.pageSubTitle}>Made by Team 2</Text>
         </View>
 
+        {/* The same images from Home Screen */}
         <View style={styles.imagesIcons}>
           <Image
             style={{ width: 20, height: 34 }}
@@ -35,9 +39,9 @@ const Aboutscreen = ({ navigation }) => {
             style={{ width: 27, height: 33 }}
             source={require("../../../assets/icons/security.png")} />
         </View>
-
       </View>
 
+      {/* This container holds the two main buttons */}
       <View style={styles.containerButtons}>
         <OutlineButton
           title="CONNECT"

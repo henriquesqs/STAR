@@ -1,14 +1,11 @@
 import React from 'react';
-import { Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { Text, TouchableOpacity } from 'react-native';
 
 import styles from "./styles";
 
+// This is a Button that we've created for better custommizing it.
+// The diff between the other Button is that this one is outlined :P
 const OutlineButton = (props) => {
-  // We can use fontsLoaded to only load this component when
-  // the font is loaded
-  // let [fontsLoaded] = useFonts({
-  //   Roboto_400Regular,
-  // });
 
   return (
     <TouchableOpacity style={styles.button} onPress={props.onPress}>
