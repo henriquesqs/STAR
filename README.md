@@ -10,7 +10,7 @@ Made with React Native
 - Clone this repository and run `npm install` inside the cloned folder;
 - To start the application, run `expo start`;
 - If everything goes right, a new tab will be opened on your web browser;
-- Open Expo app in your phone and scan the QR Code. The app will start on your phone; **OR**
+- Open Expo app on your phone and scan the QR Code. The app will start on your phone; **OR**
 - Click on **"Run on Android/device emulator"** or **"Run on iOS simulator"** to emulate the app:
 
 ![](https://i.imgur.com/xeAGnAb.png)
