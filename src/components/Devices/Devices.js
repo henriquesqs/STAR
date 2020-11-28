@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import Navbar from '../Navbar/Navbar';
-import { View, TouchableOpacity } from 'react-native';
+import React, { useState } from "react";
+import Navbar from "../Navbar/Navbar";
+import { View, TouchableOpacity } from "react-native";
 import DevicesOptions from "./DevicesOptions/DevicesOptions.js";
 import Air from "../../../assets/icons/air.png";
 import Sensor from "../../../assets/icons/sensor.png";
@@ -15,12 +15,11 @@ import styles from "./styles.js";
 // And the same component, DeviceOptions, that holds all
 // the information returned from the sensors we are connected to.
 const Devices = ({ navigation }) => {
-
   const [secondTop, setSecondTop] = useState(50);
   const [firstFlex, setFirstFlex] = useState(0.15);
   const [secondFlex, setSecondFlex] = useState(0.15);
-  const [firstDisplay, setFirstDisplay] = useState('flex');
-  const [secondDisplay, setSecondDisplay] = useState('flex');
+  const [firstDisplay, setFirstDisplay] = useState("flex");
+  const [secondDisplay, setSecondDisplay] = useState("flex");
 
   const [isFirstFocused, setisFirstFocused] = useState(false);
   // const [isSecondFocused, setisSecondFocused] = useState(false);
@@ -29,17 +28,15 @@ const Devices = ({ navigation }) => {
   // and changes the flex from the first/second component depending
   // on which component is pressed
   function focusFirstDevicesOptions() {
-
     setisFirstFocused(!isFirstFocused);
 
     if (!isFirstFocused) {
       setSecondFlex(0);
-      setSecondDisplay('none');
-    }
-    else {
+      setSecondDisplay("none");
+    } else {
       setFirstFlex(0.15);
       setSecondFlex(0.15);
-      setSecondDisplay('flex');
+      setSecondDisplay("flex");
     }
   }
 
@@ -56,7 +53,12 @@ const Devices = ({ navigation }) => {
       />
       <View style={styles.containerContent}>
         <TouchableOpacity
-          style={{ flex: firstFlex, width: '85%', top: 30, display: firstDisplay }}
+          style={{
+            flex: firstFlex,
+            width: "85%",
+            marginTop: "5%",
+            display: firstDisplay,
+          }}
           onPress={focusFirstDevicesOptions}
         >
           <DevicesOptions
@@ -64,12 +66,16 @@ const Devices = ({ navigation }) => {
             iconWidth={40}
             iconHeight={37}
             icon={Air}
-          >
-          </DevicesOptions>
+          ></DevicesOptions>
         </TouchableOpacity>
 
         <TouchableOpacity
-          style={{ flex: secondFlex, width: '85%', top: secondTop, display: secondDisplay }}
+          style={{
+            flex: secondFlex,
+            width: "85%",
+            top: secondTop,
+            display: secondDisplay,
+          }}
           onPress={focusSecondDevicesOptions}
         >
           <DevicesOptions
@@ -77,20 +83,20 @@ const Devices = ({ navigation }) => {
             iconWidth={50}
             iconHeight={40}
             icon={Sensor}
-          >
-          </DevicesOptions>
+          ></DevicesOptions>
         </TouchableOpacity>
 
-        {isFirstFocused ?
-          <DevicesOptionsFocused title="AR CONDICIONADO"
+        {isFirstFocused ? (
+          <DevicesOptionsFocused
+            title="AR CONDICIONADO"
             iconWidth={40}
             iconHeight={37}
-            icon={Air}></DevicesOptionsFocused>
-          : null
-        }
+            icon={Air}
+          ></DevicesOptionsFocused>
+        ) : null}
       </View>
     </>
   );
-}
+};
 
 export default Devices;
