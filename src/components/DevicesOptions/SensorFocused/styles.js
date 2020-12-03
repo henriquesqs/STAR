@@ -62,10 +62,17 @@ const styles = StyleSheet.create({
     // justifyContent: "space-around",
   },
   cardFourthIcon: {
-    width: "100%",
+    // width: "100%",
     flexDirection: "row",
     backgroundColor: "#1B1F3B",
-    flex: 0.142,
+    flex: 0.17,
+    // justifyContent: "space-around",
+  },
+  cardFifthIcon: {
+    // width: "100%",
+    flexDirection: "row",
+    backgroundColor: "#1B1F3B",
+    flex: 0.17,
     justifyContent: "space-around",
   },
 });

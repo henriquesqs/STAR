@@ -4,6 +4,7 @@ import NewButton from "../../Button/NewButton.js";
 import TempSensorIcon from "../../../../assets/icons/TempSensor.png";
 import LightSensorIcon from "../../../../assets/icons/LightSensor.png";
 import MotionSensorIcon from "../../../../assets/icons/MotionSensor.png";
+import HumiditySensorIcon from "../../../../assets/icons/HumiditySensor.png";
 
 import styles from "./styles.js";
 
@@ -83,6 +84,28 @@ const SensorFocused = (props) => {
       </View>
 
       <View style={styles.cardFourthIcon}>
+        <View style={styles.firstdescription}>
+          <View style={styles.imageBlock}>
+            <Image
+              source={HumiditySensorIcon}
+              width={0}
+              height={0}
+              style={{
+                resizeMode: "contain",
+                width: 50,
+                height: 45,
+                tintColor: "white",
+              }}
+            />
+          </View>
+          <View style={{ flexDirection: "column", flex: 0.65 }}>
+            <Text style={styles.state}>HUMIDITY:</Text>
+            <Text style={styles.stateMode}>teste</Text>
+          </View>
+        </View>
+      </View>
+
+      <View style={styles.cardFifthIcon}>
         <NewButton
           width={100}
           height={50}
