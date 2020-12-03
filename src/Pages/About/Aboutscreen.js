@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, Image } from 'react-native';
-import OutlineButton from "../OutlineButton/OutlineButton.js";
-import NewButton from "../Button/NewButton.js";
+import OutlineButton from "../../components/OutlineButton/OutlineButton.js"
+import NewButton from "../../components/Button/NewButton.js";
 import styles from "./styles";
 
 // This component controls the About Screen page

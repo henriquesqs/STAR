@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import Navbar from "../Navbar/Navbar";
+import Navbar from "../../components/Navbar/Navbar";
 import { View, TouchableOpacity } from "react-native";
-import DevicesOptions from "./DevicesOptions/DevicesOptions.js";
 import Air from "../../../assets/icons/air.png";
 import Sensor from "../../../assets/icons/sensor.png";
-import DevicesOptionsFocused from "./DevicesOptions/DevicesOptionsFocused/DevicesOptionsFocused.js";
+import DevicesOptions from "../../components/DevicesOptions/DevicesOptions.js";
+import AirFocused from "../../components/DevicesOptions/AirFocused/AirFocused.js";
+import SensorFocused from "../../components/DevicesOptions/SensorFocused/SensorFocused.js";
 
 import styles from "./styles.js";
 
@@ -15,6 +16,7 @@ import styles from "./styles.js";
 // And the same component, DeviceOptions, that holds all
 // the information returned from the sensors we are connected to.
 const Devices = ({ navigation }) => {
+
   const [secondTop, setSecondTop] = useState(50);
   const [firstFlex, setFirstFlex] = useState(0.15);
   const [secondFlex, setSecondFlex] = useState(0.15);
@@ -22,7 +24,7 @@ const Devices = ({ navigation }) => {
   const [secondDisplay, setSecondDisplay] = useState("flex");
 
   const [isFirstFocused, setisFirstFocused] = useState(false);
-  // const [isSecondFocused, setisSecondFocused] = useState(false);
+  const [isSecondFocused, setisSecondFocused] = useState(false);
 
   // This function handles the touch in DevicesOptions component
   // and changes the flex from the first/second component depending
@@ -41,7 +43,18 @@ const Devices = ({ navigation }) => {
   }
 
   function focusSecondDevicesOptions() {
-    alert("Coming soon! :)");
+    setisSecondFocused(!isSecondFocused);
+
+    if (!isSecondFocused) {
+      setFirstFlex(0);
+      setFirstDisplay("none");
+      setSecondTop(20);
+    } else {
+      setSecondFlex(0.15);
+      setFirstFlex(0.15);
+      setFirstDisplay("flex");
+      setSecondTop(50);
+    }
   }
 
   return (
@@ -59,8 +72,7 @@ const Devices = ({ navigation }) => {
             marginTop: "5%",
             display: firstDisplay,
           }}
-          onPress={focusFirstDevicesOptions}
-        >
+          onPress={focusFirstDevicesOptions}>
           <DevicesOptions
             title="AIR CONDITIONER"
             iconWidth={40}
@@ -76,8 +88,7 @@ const Devices = ({ navigation }) => {
             top: secondTop,
             display: secondDisplay,
           }}
-          onPress={focusSecondDevicesOptions}
-        >
+          onPress={focusSecondDevicesOptions}>
           <DevicesOptions
             title="SENSORS"
             iconWidth={50}
@@ -87,13 +98,23 @@ const Devices = ({ navigation }) => {
         </TouchableOpacity>
 
         {isFirstFocused ? (
-          <DevicesOptionsFocused
+          <AirFocused
             title="AR CONDICIONADO"
             iconWidth={40}
             iconHeight={37}
             icon={Air}
-          ></DevicesOptionsFocused>
+          ></AirFocused>
         ) : null}
+
+        {isSecondFocused ? (
+          <SensorFocused
+            title="SENSOR"
+            iconWidth={40}
+            iconHeight={37}
+            icon={Sensor}
+          ></SensorFocused>
+        ) : null}
+
       </View>
     </>
   );

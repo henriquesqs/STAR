@@ -1,8 +1,8 @@
 import React from 'react';
 import { AppLoading } from "expo";
 import { View, Text, Image } from 'react-native';
-import NewButton from "../Button/NewButton.js";
-import OutlineButton from "../OutlineButton/OutlineButton.js";
+import NewButton from "../../components/Button/NewButton.js";
+import OutlineButton from "../../components/OutlineButton/OutlineButton.js";
 import {
   useFonts,
   Roboto_100Thin,

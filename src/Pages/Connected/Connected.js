@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { AppLoading } from "expo";
 import { Image } from 'react-native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-
 import DevicesWhite from "../../../assets/icons/devices.png";
 import AlertGray from "../../../assets/icons/alert-gray.png";
-
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import Devices from "../Devices/Devices.js";
+import AboutTeam from "../../Pages/AboutTeam/AboutTeam.js";
 import {
   useFonts,
   Roboto_100Thin,
@@ -21,9 +21,6 @@ import {
   Roboto_900Black,
   Roboto_900Black_Italic,
 } from '@expo-google-fonts/roboto';
-
-import Devices from "../Devices/Devices.js";
-import AboutTeam from "../AboutTeam/AboutTeam.js";
 
 export default function Connected() {
 

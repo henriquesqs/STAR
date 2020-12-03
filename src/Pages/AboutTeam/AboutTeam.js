@@ -1,25 +1,7 @@
 import React, { useState } from 'react';
-import { Text, View, TouchableOpacity, Image, ViewPagerAndroidBase, ScrollView } from 'react-native';
-import BackArrow from "../../../assets/icons/back.png"
-import People from "../../../assets/icons/people.png";
-import {
-  useFonts,
-  Roboto_100Thin,
-  Roboto_100Thin_Italic,
-  Roboto_300Light,
-  Roboto_300Light_Italic,
-  Roboto_400Regular,
-  Roboto_400Regular_Italic,
-  Roboto_500Medium,
-  Roboto_500Medium_Italic,
-  Roboto_700Bold,
-  Roboto_700Bold_Italic,
-  Roboto_900Black,
-  Roboto_900Black_Italic,
-} from '@expo-google-fonts/roboto';
-
+import Navbar from '../../components/Navbar/Navbar.js';
+import { Text, View, TouchableOpacity, Image, ScrollView } from 'react-native';
 import styles from "./styles.js";
-import Navbar from '../Navbar/Navbar';
 
 // This component returns the information about Team 
 // members, such as their names and their own university student code
