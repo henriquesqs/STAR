@@ -57,52 +57,45 @@ const AboutTeam = ({ navigation }) => {
             <ScrollView>
 
               <Text style={styles.authorsInfoTitle}>BACK-END</Text>
-              <Text style={styles.authorsInfoName}>PESSOA 1</Text>
-              <Text style={styles.authorsInfoUsp}>NUSP 00000000</Text>
-              <Text style={styles.authorsInfoName}>PESSOA 2</Text>
-              <Text style={styles.authorsInfoUsp}>NUSP 00000000</Text>
-              <Text style={styles.authorsInfoName}>PESSOA 3</Text>
-              <Text style={styles.authorsInfoUsp}>NUSP 00000000</Text>
+              <Text style={styles.authorsInfoName}>Andre B. P. Furlanetti</Text>
+              <Text style={styles.authorsInfoUsp}>NUSP 10748305</Text>
+              <Text style={styles.authorsInfoName}>Diego da S. Parra</Text>
+              <Text style={styles.authorsInfoUsp}>NUSP 10716550</Text>
+              <Text style={styles.authorsInfoName}>Mateus F. Doimo</Text>
+              <Text style={styles.authorsInfoUsp}>NUSP 10691971</Text>
+              <Text style={styles.authorsInfoName}>Tainá A. Piai</Text>
+              <Text style={styles.authorsInfoUsp}>NUSP 9266664</Text>
 
               <Text style={styles.authorsInfoTitleMain}>BROKER</Text>
-              <Text style={styles.authorsInfoName}>PESSOA 1</Text>
-              <Text style={styles.authorsInfoUsp}>NUSP 00000000</Text>
-              <Text style={styles.authorsInfoName}>PESSOA 2</Text>
-              <Text style={styles.authorsInfoUsp}>NUSP 00000000</Text>
-              <Text style={styles.authorsInfoName}>PESSOA 3</Text>
-              <Text style={styles.authorsInfoUsp}>NUSP 00000000</Text>
+              <Text style={styles.authorsInfoName}>Leonardo P. Dias</Text>
+              <Text style={styles.authorsInfoUsp}>NUSP 10684642</Text>
+              <Text style={styles.authorsInfoName}>Marianna K. de A. Flores</Text>
+              <Text style={styles.authorsInfoUsp}>NUSP 10821144</Text>
+              <Text style={styles.authorsInfoName}>Renan G. Varoni</Text>
+              <Text style={styles.authorsInfoUsp}>NUSP 10310676</Text>
+              <Text style={styles.authorsInfoName}>Renan P. Martins</Text>
+              <Text style={styles.authorsInfoUsp}>NUSP 10716612</Text>
 
               <Text style={styles.authorsInfoTitleMain}>DATABASES</Text>
-              <Text style={styles.authorsInfoName}>PESSOA 1</Text>
-              <Text style={styles.authorsInfoUsp}>NUSP 00000000</Text>
-              <Text style={styles.authorsInfoName}>PESSOA 2</Text>
-              <Text style={styles.authorsInfoUsp}>NUSP 00000000</Text>
-              <Text style={styles.authorsInfoName}>PESSOA 3</Text>
-              <Text style={styles.authorsInfoUsp}>NUSP 00000000</Text>
+              <Text style={styles.authorsInfoName}>Daniel B. Pozzan</Text>
+              <Text style={styles.authorsInfoUsp}>NUSP 10716608</Text>
+              <Text style={styles.authorsInfoName}>Matheus A. Uema</Text>
+              <Text style={styles.authorsInfoUsp}>NUSP 10276949</Text>
+              <Text style={styles.authorsInfoName}>Nelson C. Neto</Text>
+              <Text style={styles.authorsInfoUsp}>NUSP 10277022</Text>
+              <Text style={styles.authorsInfoName}>Otavio C. Pontes</Text>
+              <Text style={styles.authorsInfoUsp}>NUSP 10716525</Text>
 
               <Text style={styles.authorsInfoTitleMain}>FRONT-END</Text>
-              <Text style={styles.authorsInfoName}>PESSOA 1</Text>
-              <Text style={styles.authorsInfoUsp}>NUSP 00000000</Text>
-              <Text style={styles.authorsInfoName}>PESSOA 2</Text>
-              <Text style={styles.authorsInfoUsp}>NUSP 00000000</Text>
-              <Text style={styles.authorsInfoName}>PESSOA 3</Text>
-              <Text style={styles.authorsInfoUsp}>NUSP 00000000</Text>
+              <Text style={styles.authorsInfoName}>Bruno dos Santos</Text>
+              <Text style={styles.authorsInfoUsp}>NUSP 10786170</Text>
+              <Text style={styles.authorsInfoName}>Gustavo T. Mastrobuono</Text>
+              <Text style={styles.authorsInfoUsp}>NUSP 10734411</Text>
+              <Text style={styles.authorsInfoName}>Henrique de S. Q. dos Santos</Text>
+              <Text style={styles.authorsInfoUsp}>NUSP 10819029</Text>
+              <Text style={styles.authorsInfoName}>Witor M. A. de Oliveira</Text>
+              <Text style={styles.authorsInfoUsp}>NUSP 10692190</Text>
 
-              <Text style={styles.authorsInfoTitle}>MICRO-SERVICES</Text>
-              <Text style={styles.authorsInfoName}>PESSOA 1</Text>
-              <Text style={styles.authorsInfoUsp}>NUSP 00000000</Text>
-              <Text style={styles.authorsInfoName}>PESSOA 2</Text>
-              <Text style={styles.authorsInfoUsp}>NUSP 00000000</Text>
-              <Text style={styles.authorsInfoName}>PESSOA 3</Text>
-              <Text style={styles.authorsInfoUsp}>NUSP 00000000</Text>
-
-              <Text style={styles.authorsInfoTitle}>SECURITY</Text>
-              <Text style={styles.authorsInfoName}>PESSOA 1</Text>
-              <Text style={styles.authorsInfoUsp}>NUSP 00000000</Text>
-              <Text style={styles.authorsInfoName}>PESSOA 2</Text>
-              <Text style={styles.authorsInfoUsp}>NUSP 00000000</Text>
-              <Text style={styles.authorsInfoName}>PESSOA 3</Text>
-              <Text style={styles.authorsInfoUsp}>NUSP 00000000</Text>
             </ScrollView>
           </View>
 
