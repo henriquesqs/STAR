@@ -34,7 +34,7 @@ const SensorFocused = (props) => {
 
           <View style={{ flexDirection: "column", flex: 0.65 }}>
             <Text style={styles.state}>TEMPERATURE:</Text>
-            <Text style={styles.stateMode}>teste</Text>
+            <Text style={styles.stateMode}>23º C</Text>
           </View>
         </View>
       </View>
@@ -56,7 +56,7 @@ const SensorFocused = (props) => {
           </View>
           <View style={{ flexDirection: "column", flex: 0.65 }}>
             <Text style={styles.state}>LUMINOSITY:</Text>
-            <Text style={styles.stateMode}>teste</Text>
+            <Text style={styles.stateMode}>ON</Text>
           </View>
         </View>
       </View>
@@ -78,7 +78,7 @@ const SensorFocused = (props) => {
           </View>
           <View style={{ flexDirection: "column", flex: 0.65 }}>
             <Text style={styles.state}>MOTION:</Text>
-            <Text style={styles.stateMode}>teste</Text>
+            <Text style={styles.stateMode}>0</Text>
           </View>
         </View>
       </View>
@@ -100,7 +100,7 @@ const SensorFocused = (props) => {
           </View>
           <View style={{ flexDirection: "column", flex: 0.65 }}>
             <Text style={styles.state}>HUMIDITY:</Text>
-            <Text style={styles.stateMode}>teste</Text>
+            <Text style={styles.stateMode}>30</Text>
           </View>
         </View>
       </View>
@@ -111,7 +111,7 @@ const SensorFocused = (props) => {
           height={50}
           bgColor={"#454ADE"}
           bRadius={10}
-          title={"ATUALIZAR"}
+          title={"UPDATE"}
           txtColor="white"
           txtSize={13}
           marginTop={"16%"}
