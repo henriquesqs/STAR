@@ -1,8 +1,10 @@
 import React from "react";
+import api from "../../services/api.js";
 import { AppLoading } from "expo";
 import { View, Text, Image } from "react-native";
 import NewButton from "../../components/Button/NewButton.js";
 import OutlineButton from "../../components/OutlineButton/OutlineButton.js";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import {
   useFonts,
   Roboto_100Thin,
@@ -27,6 +29,7 @@ import styles from "./styles";
 // It receives a prop, navigation, that can handle
 // navigation between screens.
 const Homescreen = ({ navigation }) => {
+
   let [fontsLoaded] = useFonts({
     Roboto_100Thin,
     Roboto_100Thin_Italic,
@@ -41,6 +44,37 @@ const Homescreen = ({ navigation }) => {
     Roboto_900Black,
     Roboto_900Black_Italic,
   });
+
+  const storeData = async (key, value) => {
+    try {
+      await AsyncStorage.setItem(key, value)
+    } catch (e) {
+      console.log("Error while storing token: " + e);
+    }
+  }
+
+  function tryConnection() {
+
+    const headers = {
+      'Content-Type': 'application/json',
+      'x-access-token': '',
+    }
+
+    api.post('api/auth/login', {
+      "user": "iot",
+      "password": "GI%G*q&NvZA&67xTbnugoY"
+    }, {
+      headers
+    })
+      .then(function (response) {
+        console.log("Seu token:" + response.data["token"]);
+        storeData('@storage_Key', response.data["token"]);
+        navigation.navigate("Connect")
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
 
   // Wait until all the fonts are loaded
   if (!fontsLoaded) {
@@ -89,7 +123,7 @@ const Homescreen = ({ navigation }) => {
             txtColor="white"
             txtSize={17}
             marginTop={"25%"}
-            onPress={() => navigation.navigate("Connect")}
+            onPress={tryConnection}
           />
           {/* When pressed, this second button sends the user 
           to "About" component/page */}
