@@ -12,6 +12,7 @@ import styles from "./styles.js";
 
 const SensorFocused = (props) => {
 
+  const [motion, setMotion] = useState("0");
   const [humidity, setHumidity] = useState(0);
   const [temperature, setTemperature] = useState(0);
   const [luminosity, setLuminosity] = useState(false);
@@ -38,7 +39,10 @@ const SensorFocused = (props) => {
 
         // If we are checking motion sensor data
         else if (sensor_id === 25) {
-
+          // Convert from UNIX_TIMESTAMP to Locale Time String
+          var s = new Date(response.data["data"]["_seconds"] * 1000).toLocaleTimeString("en-US")
+          // console.log(s)
+          setMotion(s)
         }
 
         // If we are checking luminosity sensor data
@@ -52,7 +56,7 @@ const SensorFocused = (props) => {
   }
 
   const getToken = async (key) => {
-    
+
     try {
 
       const value = await AsyncStorage.getItem(key)
@@ -73,6 +77,19 @@ const SensorFocused = (props) => {
     // Getting access-token
     getToken("@storage_Key");
   }
+
+  // Execute this function once to get initial values
+  var immediate = setImmediate(function () {
+    console.log("\n[SensorFocused] Set initial values via Immediate function\n")
+    getToken("@storage_Key")
+    // clearImmediate(immediate)
+
+    // // Updates sensors data every 5min
+    // let interval = setInterval(function () {
+    //   console.log("\n[SensorFocused] Set values via Interval function\n")
+    //   getToken("@storage_Key")
+    // }, 180000);
+  })
 
   return (
     <View style={styles.focused}>
@@ -142,7 +159,7 @@ const SensorFocused = (props) => {
           </View>
           <View style={{ flexDirection: "column", flex: 0.65 }}>
             <Text style={styles.state}>MOTION:</Text>
-            <Text style={styles.stateMode}>0</Text>
+            <Text style={styles.stateMode}>LAST ACTIVITY: {motion}</Text>
           </View>
         </View>
       </View>
