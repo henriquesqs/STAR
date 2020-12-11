@@ -86,14 +86,20 @@ const styles = StyleSheet.create({
     justifyContent: "space-around",
   },
   cardSixthIcon: {
-    width: "100%",
+    alignSelf: 'center',
+    width: "66%",
     flexDirection: "row",
     backgroundColor: "#1B1F3B",
     flex: 0.142,
     borderBottomRightRadius: 13,
     borderBottomLeftRadius: 13,
-    justifyContent: "space-around",
+    justifyContent: "space-between",
   },
+  lastUpdateText: {
+    fontSize: 15,
+    color: "white",
+    fontFamily: "Roboto_500Medium",
+  }
 });
 
 export default styles;
