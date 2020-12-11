@@ -57,7 +57,6 @@ const Homescreen = ({ navigation }) => {
 
     const headers = {
       'Content-Type': 'application/json',
-      'x-access-token': '',
     }
 
     api.post('api/auth/login', {
@@ -72,7 +71,7 @@ const Homescreen = ({ navigation }) => {
         navigation.navigate("Connect")
       })
       .catch(function (error) {
-        console.log(error);
+        console.log("Erro na autenticação\n" + error);
       });
   }
 
