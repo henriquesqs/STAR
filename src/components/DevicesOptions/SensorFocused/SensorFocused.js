@@ -13,8 +13,17 @@ import styles from "./styles.js";
 const SensorFocused = (props) => {
 
   const [motion, setMotion] = useState("0");
-  const [humidity, setHumidity] = useState(0);
-  const [temperature, setTemperature] = useState(0);
+
+  const [humiditySensor1, setHumiditySensor1] = useState(0);
+  const [humiditySensor2, setHumiditySensor2] = useState(0);
+  const [humiditySensor3, setHumiditySensor3] = useState(0);
+  const [meanHumidity, setMeanHumidity] = useState(0.0);
+
+  const [temperatureSensor1, setTemperatureSensor1] = useState(0);
+  const [temperatureSensor2, setTemperatureSensor2] = useState(0);
+  const [temperatureSensor3, setTemperatureSensor3] = useState(0);
+  const [meanTemperature, setMeanTemperature] = useState(0.0);
+
   const [luminosity, setLuminosity] = useState(false);
 
   function apiCall(token, sensor_id) {
@@ -32,9 +41,15 @@ const SensorFocused = (props) => {
       .then(function (response) {
 
         // If we are checking humidity sensor data
-        if (sensor_id === 20 || sensor_id === 21 || sensor_id === 22) {
-          setTemperature(response.data["valor_temperatura"]);
-          setHumidity(response.data["valor_umidade"]);
+        if (sensor_id === 20) {
+          setTemperatureSensor1(response.data["valor_temperatura"]);
+          setHumiditySensor1(response.data["valor_umidade"]);
+        } else if (sensor_id == 21) {
+          setTemperatureSensor2(response.data["valor_temperatura"]);
+          setHumiditySensor2(response.data["valor_umidade"]);
+        } else if (sensor_id == 22) {
+          setTemperatureSensor3(response.data["valor_temperatura"]);
+          setHumiditySensor3(response.data["valor_umidade"]);
         }
 
         // If we are checking motion sensor data
@@ -49,6 +64,10 @@ const SensorFocused = (props) => {
         else if (sensor_id === 26) {
           setLuminosity(response.data["valor"]);
         }
+
+        setMeanHumidity(Math.round((humiditySensor1 + humiditySensor2 + humiditySensor3) / 3))
+        setMeanTemperature(Math.round((temperatureSensor1 + temperatureSensor2 + temperatureSensor3) / 3))
+
       })
       .catch(function (error) {
         console.log("Erro na obtenção dos dados do sensor\n" + error);
@@ -64,6 +83,8 @@ const SensorFocused = (props) => {
       if (value !== null) {
         console.log("\nGetting data from sensors...\n");
         apiCall(value, 20); // updating humidity/temp sensor data
+        apiCall(value, 21); // updating humidity/temp sensor data
+        apiCall(value, 22); // updating humidity/temp sensor data
         apiCall(value, 25); // updating motion sensor data
         apiCall(value, 26); // updating luminosity sensor data
       }
@@ -114,8 +135,8 @@ const SensorFocused = (props) => {
           </View>
 
           <View style={{ flexDirection: "column", flex: 0.65 }}>
-            <Text style={styles.state}>TEMPERATURE:</Text>
-            <Text style={styles.stateMode}>{temperature} °C</Text>
+            <Text style={styles.state}>AVG. TEMPERATURE:</Text>
+            <Text style={styles.stateMode}>{meanTemperature} °C</Text>
           </View>
         </View>
       </View>
@@ -180,8 +201,8 @@ const SensorFocused = (props) => {
             />
           </View>
           <View style={{ flexDirection: "column", flex: 0.65 }}>
-            <Text style={styles.state}>HUMIDITY:</Text>
-            <Text style={styles.stateMode}>{humidity}%</Text>
+            <Text style={styles.state}>AVG. HUMIDITY:</Text>
+            <Text style={styles.stateMode}>{meanHumidity}%</Text>
           </View>
         </View>
       </View>
