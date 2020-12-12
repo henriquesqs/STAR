@@ -3,6 +3,7 @@ import styles from "./styles.js";
 import { Text, View, Image } from 'react-native';
 import BackArrow from "../../../assets/icons/back.png"
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 // A simple Navbar that holds an arrow icon to go back to Home screen,
 // a title and a subtitle for the current screen
@@ -12,6 +13,16 @@ const Navbar = (props) => {
   // from the app/device and send this user to Home screen.
   // We're showing an alert to the user
   function handleBackButton(nav) {
+
+    const removeValue = async () => {
+      try {
+        await AsyncStorage.removeItem('@storage_Key')
+      } catch (e) {
+        // remove error
+        alert("Error while disconnecting you...")
+        console.log("Error while disconnecting user:\n" + e)
+      }
+    }
     alert('You have been disconnected from this device!');
     nav.navigate("Home");
   }
