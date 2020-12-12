@@ -1,4 +1,4 @@
-![](https://i.imgur.com/QbgaBba.jpg)
+![](https://i.imgur.com/jouKPkd.png)
 
 # IOT App project
 Interface to control some air-conditioner functions via a REST API connected to a MQTT Broker. You can check the api [here](https://github.com/andrebpradof/IoT).
