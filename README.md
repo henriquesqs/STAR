@@ -1,5 +1,7 @@
+![](https://i.imgur.com/QbgaBba.jpg)
+
 # IOT App project
-Made with React Native
+Interface to control some air-conditioner functions via a REST API connected to a MQTT Broker. You can check the api [here](https://github.com/andrebpradof/IoT).
 
 ## Requisites
 - Install [node](https://nodejs.org/en/)
@@ -15,3 +17,6 @@ Made with React Native
 - Click on **"Run on Android/device emulator"** to emulate the app:
 
 ![](https://i.imgur.com/xeAGnAb.png)
+
+## Credits
+Development team members are listed on the app
