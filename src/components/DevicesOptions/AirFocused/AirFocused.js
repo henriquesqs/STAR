@@ -19,18 +19,27 @@ const AirFocused = (props) => {
 
   const [iconsColor, setIconsColors] = useState("white");
 
-  // States to handle air-c functions
+  /***********************************/
+  /* States to handle air-c functions */
+  /***********************************/
+
+  // States to control air-c power option (ON/OFF) and its
+  // button color and text according to the choosen option
   const [deviceState, setDeviceState] = useState("ON");
   const [deviceStateButtonText, setDeviceStateButtonText] = useState("OFF");
 
+  // States to control air-c min temperature and its buttons (inc/decrease)
   const [minTemp, setMinTemp] = useState(16);
   const [minTempDecButtonColor, setMinTempDecButtonColor] = useState("#454ADE");
   const [minTempIncButtonColor, setMinTempIncButtonColor] = useState("#454ADE");
 
+  // States to control air-c max temperature and its buttons (inc/decrease)
   const [maxTemp, setMaxTemp] = useState(18);
   const [maxTempDecButtonColor, setMaxTempDecButtonColor] = useState("#454ADE");
   const [maxTempIncButtonColor, setMaxTempIncButtonColor] = useState("#454ADE");
 
+  // States to control air-c min current temperature and its buttons 
+  // (inc/decrease)
   const [currentTemp, setCurrentTemp] = useState(17);
   const [currentTempDecButtonColor, setCurrentTempDecButtonColor] = useState(
     "#454ADE"
@@ -39,6 +48,9 @@ const AirFocused = (props) => {
     "#454ADE"
   );
 
+  // Below, states to control air-conditioner state according to the 
+  // human presence inside the room and the button color and text
+  // according to the button state (ON/OFF)
   const [noPeople, setNoPeople] = useState("ON");
   const [noPeopleButtonText, setNoPeopleButtonText] = useState("OFF");
   const [noPeopleButtonColor, setNoPeopleButtonColor] = useState("#454ADE");
@@ -54,7 +66,7 @@ const AirFocused = (props) => {
       'x-access-token': token,
     }
 
-    console.log("\nGetting data from air-conditioner...\n");
+    // console.log("\nGetting data from air-conditioner...\n");
 
     api.get('api/ar/2/24', {
       headers
@@ -110,7 +122,8 @@ const AirFocused = (props) => {
 
       })
       .catch(function (error) {
-        console.log("Erro na obtenção dos dados do sensor\n" + error);
+        alert("Error while retrieving air-conditioner data")
+        console.log("Error while retrieving air-conditioner data:\n" + error);
       });
   }
 
@@ -123,6 +136,7 @@ const AirFocused = (props) => {
       }
     } catch (e) {
       // error reading value
+      alert("Error while reading token...")
       console.log("Error while reading token...\n" + e);
     }
   }
@@ -134,7 +148,7 @@ const AirFocused = (props) => {
 
   // Execute this function once to get initial values
   var immediate = setImmediate(function () {
-    console.log("\n[AirFocused] Set initial values via Immediate function\n")
+    // console.log("\n[AirFocused] Set initial values via Immediate function\n")
     getToken("@storage_Key")
     clearImmediate(immediate)
   })

@@ -33,7 +33,7 @@ const SensorFocused = (props) => {
       'x-access-token': token,
     }
 
-    console.log("Obtendo dados do sensor " + sensor_id + "...\n");
+    // console.log("Obtendo dados do sensor " + sensor_id + "...\n");
 
     api.get('api/sensor/2/' + sensor_id, {
       headers
@@ -54,10 +54,15 @@ const SensorFocused = (props) => {
 
         // If we are checking motion sensor data
         else if (sensor_id === 25) {
+
           // Convert from UNIX_TIMESTAMP to Locale Time String
-          var s = new Date(response.data["data"]["_seconds"] * 1000).toLocaleTimeString("en-US")
-          // console.log(s)
-          setMotion(s)
+          var hour = new Date(response.data["data"]["_seconds"] * 1000).toLocaleTimeString("en-US", { hour12: false })
+          var date = new Date(response.data["data"]["_seconds"] * 1000).toLocaleDateString("en-US")
+          // console.log(response.data["data"]["_seconds"])
+          var updated = date.concat(" at ")
+          updated = updated.concat(hour)
+          // console.log(updated)
+          setMotion(updated)
         }
 
         // If we are checking luminosity sensor data
@@ -72,7 +77,8 @@ const SensorFocused = (props) => {
 
       })
       .catch(function (error) {
-        console.log("Erro na obtenção dos dados do sensor\n" + error);
+        alert("Error while retrieving sensors data...")
+        console.log("Error while retrieving sensors data:\n" + error);
       });
   }
 
@@ -83,7 +89,7 @@ const SensorFocused = (props) => {
       const value = await AsyncStorage.getItem(key)
 
       if (value !== null) {
-        console.log("\nGetting data from sensors...\n");
+        // console.log("\nGetting data from sensors...\n");
         apiCall(value, 20); // updating humidity/temp sensor data
         apiCall(value, 21); // updating humidity/temp sensor data
         apiCall(value, 22); // updating humidity/temp sensor data
@@ -92,6 +98,7 @@ const SensorFocused = (props) => {
       }
     } catch (e) {
       // error reading value
+      alert("Error while reading token...\n")
       console.log("Error while reading token...\n" + e);
     }
   }
@@ -103,9 +110,9 @@ const SensorFocused = (props) => {
 
   // Execute this function once to get initial values
   var immediate = setImmediate(function () {
-    console.log("\n[SensorFocused] Set initial values via Immediate function\n")
+    // console.log("\n[SensorFocused] Defining initial values via Immediate function\n")
     getToken("@storage_Key")
-    // clearImmediate(immediate)
+    clearImmediate(immediate)
 
     // // Updates sensors data every 5min
     // let interval = setInterval(function () {
@@ -181,8 +188,8 @@ const SensorFocused = (props) => {
             />
           </View>
           <View style={{ flexDirection: "column", flex: 0.65 }}>
-            <Text style={styles.state}>MOTION:</Text>
-            <Text style={styles.stateMode}>LAST ACTIVITY: {motion}</Text>
+            <Text style={styles.state}>MOTION (M/D/Y):</Text>
+            <Text style={styles.stateMode}>{motion}</Text>
           </View>
         </View>
       </View>
