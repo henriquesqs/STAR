@@ -65,6 +65,8 @@ const SensorFocused = (props) => {
           setLuminosity(response.data["valor"]);
         }
 
+        // Calculating the humidity and temperature mean values
+        // and updating state value
         setMeanHumidity(Math.round((humiditySensor1 + humiditySensor2 + humiditySensor3) / 3))
         setMeanTemperature(Math.round((temperatureSensor1 + temperatureSensor2 + temperatureSensor3) / 3))
 
