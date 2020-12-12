@@ -3,6 +3,9 @@
 # IOT App project
 Interface to control some air-conditioner functions via a REST API connected to a MQTT Broker. You can check the api [here](https://github.com/andrebpradof/IoT).
 
+## Notes
+This app was **only tested on some android devices**.
+
 ## Requisites
 - Install [node](https://nodejs.org/en/)
 - Install [expo-cli](https://docs.expo.io/workflow/expo-cli/)
