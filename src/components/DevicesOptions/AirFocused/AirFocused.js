@@ -17,123 +17,58 @@ const AirFocused = (props) => {
   // Session access token
   var session_token;
 
-  const [iconsColor, setIconsColors] = useState("white");
+  var first = true;
 
-  /***********************************/
+  /************************************/
   /* States to handle air-c functions */
-  /***********************************/
+  /************************************/
 
-  // States to control air-c power option (ON/OFF) and its
-  // button color and text according to the choosen option
-  const [deviceState, setDeviceState] = useState("ON");
-  const [deviceStateButtonText, setDeviceStateButtonText] = useState("OFF");
+  // States to control air-c power option (ON/OFF)
+  const [deviceState, setDeviceState] = useState("LOADING");  
 
-  // States to control air-c min temperature and its buttons (inc/decrease)
-  const [minTemp, setMinTemp] = useState(16);
-  const [minTempDecButtonColor, setMinTempDecButtonColor] = useState("#454ADE");
-  const [minTempIncButtonColor, setMinTempIncButtonColor] = useState("#454ADE");
-
-  // States to control air-c max temperature and its buttons (inc/decrease)
-  const [maxTemp, setMaxTemp] = useState(18);
-  const [maxTempDecButtonColor, setMaxTempDecButtonColor] = useState("#454ADE");
-  const [maxTempIncButtonColor, setMaxTempIncButtonColor] = useState("#454ADE");
-
-  // States to control air-c min current temperature and its buttons 
-  // (inc/decrease)
-  const [currentTemp, setCurrentTemp] = useState(17);
-  const [currentTempDecButtonColor, setCurrentTempDecButtonColor] = useState(
-    "#454ADE"
-  );
-  const [currentTempIncButtonColor, setCurrentTempIncButtonColor] = useState(
-    "#454ADE"
-  );
+  // States to control air-c min temperature
+  const [minTemp, setMinTemp] = useState(0);
+  
+  // States to control air-c max temperature
+  const [maxTemp, setMaxTemp] = useState(0);
+  
+  // States to control air-c min current temperature
+  const [currentTemp, setCurrentTemp] = useState(0);
 
   // Below, states to control air-conditioner state according to the 
-  // human presence inside the room and the button color and text
-  // according to the button state (ON/OFF)
-  const [noPeople, setNoPeople] = useState("ON");
-  const [noPeopleButtonText, setNoPeopleButtonText] = useState("OFF");
-  const [noPeopleButtonColor, setNoPeopleButtonColor] = useState("#454ADE");
+  // human presence inside the room
+  const [noPeople, setNoPeople] = useState("LOADING");
 
-  const textColor = {
-    color: iconsColor,
-  };
+  // Initiate states variables values according 
+  // to sensor data requested via api
+  function initValues(){
 
-  function getCurrentValues(token) {
+    handleSetState(false);
+    
+    handleDecreaseMinTemp(false);
+    handleIncreaseMinTemp(false);
+    
+    handleDecreaseMaxTemp(false);
+    handleIncreaseMaxTemp(false);
 
-    const headers = {
-      'Content-Type': 'application/json; charset=utf-8',
-      'x-access-token': token,
-    }
+    handleDecreaseCurrentTemp(false);
+    handleIncreaseCurrentTemp(false);
 
-    // console.log("\nGetting data from air-conditioner...\n");
+    handleNoPeople(false);
 
-    api.get('api/ar/2/24', {
-      headers
-    })
-      .then(function (response) {
-
-        // Setting "max temperature" value
-        setMaxTemp(response.data["temp_max"]);
-
-        if (maxTemp == 17) {
-          setMaxTempDecButtonColor("gray");
-        }
-        else {
-          setMaxTempDecButtonColor("#454ADE");
-        }
-
-        if (maxTemp == 23) {
-          setMaxTempIncButtonColor("gray");
-        }
-        else {
-          setMaxTempIncButtonColor("#454ADE");
-        }
-
-        // Setting "min temperature" value
-        setMinTemp(response.data["temp_min"]);
-
-        if (minTemp == 16) {
-          setMinTempDecButtonColor("gray");
-        }
-        else {
-          setMinTempDecButtonColor("#454ADE");
-        }
-
-        if (minTemp == 22) {
-          setMinTempIncButtonColor("gray");
-        }
-        else {
-          setMinTempIncButtonColor("#454ADE");
-        }
-
-        // Setting "current temperature" value
-        setCurrentTemp(response.data["temp_atual"]);
-
-        // Setting "status when empty room" value 
-        if (response.data["status_sala"]) {
-          setNoPeople("ON");
-          setNoPeopleButtonText("OFF");
-        }
-        else {
-          setNoPeople("OFF");
-          setNoPeopleButtonText("ON");
-        }
-
-      })
-      .catch(function (error) {
-        alert("Error while retrieving air-conditioner data")
-        console.log("Error while retrieving air-conditioner data:\n" + error);
-      });
   }
 
   const getToken = async (key) => {
-
     try {
       session_token = await AsyncStorage.getItem(key)
       if (session_token !== null) {
-        getCurrentValues(session_token);
+        // console.log("got token");
+        initValues();
       }
+      else{
+        console.log("Could not find this token...");
+      }
+      return;
     } catch (e) {
       // error reading value
       alert("Error while reading token...")
@@ -141,59 +76,113 @@ const AirFocused = (props) => {
     }
   }
 
-  function getSensorData() {
-    // Getting access-token
-    getToken("@storage_Key");
+  async function updateData(){
+
+    await api.get('/api/ar/2/24', {
+      headers: {
+        'Content-Type': 'application/json; charset=utf-8',
+        'x-access-token': session_token
+      }
+    })
+    .then(function (response) {
+
+      // console.log("Updated air-conditioner data");
+
+      if(response.data["on_off"] === true) 
+        setDeviceState("ON");
+      else setDeviceState("OFF");
+
+      setMinTemp(response.data["temp_min"]);
+      
+      setMaxTemp(response.data["temp_max"]);
+      
+      setCurrentTemp(response.data["temp_atual"]);
+      
+      if(response.data["status_sala"] === true) 
+        setNoPeople("ON");
+      else setNoPeople("OFF");
+
+    })
+    .catch(function (error) {
+      console.log("Could not update air-conditioner data... Error:\n" + error);
+    });
   }
 
   // Execute this function once to get initial values
-  var immediate = setImmediate(function () {
-    // console.log("\n[AirFocused] Set initial values via Immediate function\n")
-    getToken("@storage_Key")
+  var immediate = setImmediate(async function () {
+    await getToken("@storage_Key")
     clearImmediate(immediate)
   })
 
-  // This function handles clicks on NoPeople button
-  function handleNoPeople() {
-    if (noPeople == "ON") {
-      setNoPeople("OFF");
-      setNoPeopleButtonText("TURN ON");
-    } else {
-      setNoPeople("ON");
-      setNoPeopleButtonText("TURN OFF");
+  function handleSetState(updating){
+
+    // if(first == true){
+    //   alert("Please, update first");
+    //   return;
+    // }
+
+    if(!updating){
+
+      api.get('/api/ar/2/24', {
+        headers: {
+          'Content-Type': 'application/json; charset=utf-8',
+          'x-access-token': session_token
+        }
+      })
+      .then(function (response) {
+  
+        if(response.data["on_off"] == true && deviceState != "ON"){
+          setDeviceState("ON");
+        }
+  
+        else if(response.data["on_off"] == false && deviceState != "OFF"){
+          setDeviceState("OFF");          
+        }
+      })
+      .catch(function (error) {
+        console.log("Could not load air-conditioner data... Error:\n" + error);
+      })
+      .then(
+        updateData()
+      );
     }
-  }
 
-  // This function handles clicks on Power Button
-  function handleSetState() {
+    if(updating){
 
-    if (deviceState == "ON") {
+      var newDeviceState;
 
-      setDeviceState("OFF");
-      setIconsColors("gray");
-      setDeviceStateButtonText("TURN ON");
-      setMinTempDecButtonColor("gray");
-      setMinTempIncButtonColor("gray");
-      setMaxTempDecButtonColor("gray");
-      setMaxTempIncButtonColor("gray");
-      setCurrentTempDecButtonColor("gray");
-      setCurrentTempIncButtonColor("gray");
-      setTimeoutDecButtonColor("gray");
-      setTimeoutIncButtonColor("gray");
-      setNoPeopleButtonColor("gray");
-    } else {
-      setDeviceState("ON");
-      setIconsColors("white");
-      setDeviceStateButtonText("TURN OFF");
-      setMinTempDecButtonColor("#454ADE");
-      setMinTempIncButtonColor("#454ADE");
-      setMaxTempDecButtonColor("#454ADE");
-      setMaxTempIncButtonColor("#454ADE");
-      setCurrentTempDecButtonColor("#454ADE");
-      setCurrentTempIncButtonColor("#454ADE");
-      setTimeoutDecButtonColor("#454ADE");
-      setTimeoutIncButtonColor("#454ADE");
-      setNoPeopleButtonColor("#454ADE");
+      if(deviceState == 'OFF'){
+        newDeviceState = 1;
+      }
+      else{
+        newDeviceState = 0;
+      }
+
+      api.post('/api/ar/2/24', {
+        "0": 1,
+        "21": newDeviceState,
+        "23": 992199
+      }, {
+        headers: {
+          'x-access-token': session_token
+        }
+      })
+      .then(function (response) {
+
+        console.log("Updating air-conditioner state...");
+
+        if(newDeviceState == 0){
+          setDeviceState('OFF');
+        }
+        else{
+          setDeviceState('ON');
+        }
+      })
+      .catch(function (error) {
+        console.log("Error while updating air-conditioner state\n " + error);
+      }).then(
+        updateData()
+      );      
     }
   }
 
@@ -201,38 +190,60 @@ const AirFocused = (props) => {
   // It checks wheter user can continue to decrease the MinTemp value or not
   // It also checks if by decreasing the MinTemp value, the user now can
   // increase the MinTemp value.
-  function handleDecreaseMinTemp() {
+  function handleDecreaseMinTemp(updating) {
 
-    // Get current data
-    getSensorData();
+    // if(first == true){
+    //   alert("Please, update first");
+    //   return;
+    // }
 
-    const headers = {
-      'Content-Type': 'application/json; charset=utf-8',
-      'x-access-token': session_token,
+    if(!updating){
+
+      api.get('/api/ar/2/24', {
+        headers: {
+          'x-access-token': session_token
+        }
+      })
+      .then(function (response) {
+        setMinTemp(response.data["temp_min"]);
+      })
+      .catch(function (error) {
+        console.log("Could not load minTemp information... Error:\n" + error);
+      })
+      .then(
+        updateData()
+      );
     }
 
-    var newMinTemp = minTemp - 1;
+    if(updating){
 
-    api.post('api/ar/2/24', {
-      "0": 8,
-      "2": newMinTemp,
-      "23": 12345
-    }, { headers })
+      if(deviceState == 'OFF'){
+        alert("Air-conditioner is off. Turn it on and try again...");
+        return;
+      } else if (minTemp == 16) {
+        alert("Can't decrease more...");
+        return;
+      }
+      
+      var newMinTemp = minTemp - 1;
+
+      api.post('/api/ar/2/24', {
+        "0": 8,
+        "2": newMinTemp,
+        "23": 992999
+      }, {
+        headers: {
+          'x-access-token': session_token
+        }
+      })
       .then(function (response) {
-        console.log("Decrementando temperatura mínima. Resposta do servidor\n " + response);
+
+        console.log("Decreasing minTemp...");
         setMinTemp(newMinTemp);
       })
       .catch(function (error) {
-        console.log("Erro ao decrementar a temperatura mínima:\n" + error);
+        console.log("Error while decreasing minTemp\n " + error);
       });
-
-    if (minTemp == 16) {
-      setMinTempDecButtonColor("gray");
-    } else {
-      setMinTempDecButtonColor("#454ADE");
-      if (minTemp < 22) {
-        setMinTempIncButtonColor("#454ADE");
-      }
     }
   }
 
@@ -240,181 +251,324 @@ const AirFocused = (props) => {
   // It checks wheter user can continue to increase the MinTemp value or not
   // It also checks if by increasing the MinTemp value, the user now can
   // decrease the MinTemp value.
-  function handleIncreaseMinTemp() {
+  function handleIncreaseMinTemp(updating) {
 
-    // Get current data
-    getSensorData();
+    if(!updating){
 
-    const headers = {
-      'Content-Type': 'application/json; charset=utf-8',
-      'x-access-token': session_token,
+      api.get('/api/ar/2/24', {
+        headers: {
+          'x-access-token': session_token
+        }
+      })
+      .then(function (response) {      
+        setMinTemp(response.data["temp_min"]);        
+      })
+      .catch(function (error) {
+        console.log("Could not load air-conditioner data... Error:\n" + error);
+      });
     }
 
-    var newMinTemp = minTemp + 1;
+    if(updating){
 
-    api.post('api/ar/2/24', {
-      "0": 8,
-      "2": newMinTemp,
-      "23": 12345
-    }, { headers })
+      if(deviceState == 'OFF'){
+        alert("Air-conditioner is off. Turn it on and try again...");
+        return;
+      } else if (minTemp == 22) {
+        alert("Can't increase more...");
+        return;
+      }
+
+      var newMinTemp = minTemp + 1;
+
+      api.post('/api/ar/2/24', {
+        "0": 8,
+        "2": newMinTemp,
+        "23": 992999
+      }, {
+        headers: {
+          'x-access-token': session_token
+        }
+      })
       .then(function (response) {
-        console.log("Incrementando temperatura mínima. Resposta do servidor\n " + response);
+        console.log("Increasing minTemp...");
         setMinTemp(newMinTemp);
       })
       .catch(function (error) {
-        console.log("Erro ao incrementar a temperatura mínima:\n" + error);
-      });
-
-    if (minTemp == 22) {
-      setMinTempIncButtonColor("gray");
-    } else {
-      setMinTempIncButtonColor("#454ADE");
-    }
-
-    if (minTemp > 16 && minTemp <= 22) {
-      setMinTempDecButtonColor("#454ADE");
+        console.log("Error while increasing minTemp\n " + error);
+      });      
     }
   }
 
-  function handleDecreaseMaxTemp() {
+  function handleDecreaseMaxTemp(updating) {
 
-    // Get current data
-    getSensorData();
+    // if(first == true){
+    //   alert("Please, update first");
+    //   return;
+    // }
 
-    const headers = {
-      'Content-Type': 'application/json; charset=utf-8',
-      'x-access-token': session_token,
+    if(!updating){
+
+      api.get('/api/ar/2/24', {
+        headers: {
+          'x-access-token': session_token
+        }
+      })
+      .then(function (response) {
+        setMaxTemp(response.data["temp_max"]);
+      })
+      .catch(function (error) {
+        console.log("Could not load maxTemp information... Error:\n" + error);
+      })
+      .then(
+        updateData()
+      );
     }
 
-    var newMaxTemp = maxTemp - 1;
+    if(updating){
 
-    api.post('api/ar/2/24', {
-      "0": 4,
-      "1": newMaxTemp,
-      "23": 12345
-    }, { headers })
+      if(deviceState == 'OFF'){
+        alert("Air-conditioner is off. Turn it on and try again...");
+        return;
+      } else if (maxTemp == 17) {
+        alert("Can't decrease more...");
+        return;
+      }
+      
+      var newMaxTemp = maxTemp - 1;
+
+      api.post('/api/ar/2/24', {
+        "0": 4,
+        "1": newMaxTemp,
+        "23": 991999
+      }, {
+        headers: {
+          'x-access-token': session_token
+        }
+      })
       .then(function (response) {
-        console.log("Decrementando temperatura máxima. Resposta do servidor\n " + response);
+
+        console.log("Decreasing maxTemp...");
         setMaxTemp(newMaxTemp);
       })
       .catch(function (error) {
-        console.log("Erro ao decrementar a temperatura máxima:\n" + error);
-      });
-
-    if (maxTemp == 17) {
-      setMaxTempDecButtonColor("gray");
-    } else {
-      setMaxTempDecButtonColor("#454ADE");
-      if (maxTemp <= 22) {
-        setMaxTempIncButtonColor("#454ADE");
-      }
+        console.log("Error while decreasing maxTemp\n " + error);
+      });      
     }
   }
 
-  function handleIncreaseMaxTemp() {
+  function handleIncreaseMaxTemp(updating) {
 
-    // Get current data
-    getSensorData();
+    if(!updating){
 
-    const headers = {
-      'Content-Type': 'application/json; charset=utf-8',
-      'x-access-token': session_token,
+      api.get('/api/ar/2/24', {
+        headers: {
+          'x-access-token': session_token
+        }
+      })
+      .then(function (response) {      
+        setMaxTemp(response.data["temp_max"]);        
+      })
+      .catch(function (error) {
+        console.log("Could not load air-conditioner data... Error:\n" + error);
+      });
     }
 
-    var newMaxTemp = maxTemp + 1;
+    if(updating){
 
-    api.post('api/ar/2/24', {
-      "0": 4,
-      "1": newMaxTemp,
-      "23": 12345
-    }, { headers })
+      if(deviceState == 'OFF'){
+        alert("Air-conditioner is off. Turn it on and try again...");
+        return;
+      } else if (maxTemp == 23) {
+        alert("Can't increase more...");
+        return;
+      }
+
+      var newMaxTemp = maxTemp + 1;
+
+      api.post('/api/ar/2/24', {
+        "0": 4,
+        "1": newMaxTemp,
+        "23": 991999
+      }, {
+        headers: {
+          'x-access-token': session_token
+        }
+      })
       .then(function (response) {
-        console.log("Incrementando temperatura máxima. Resposta do servidor\n " + response);
+        console.log("Increasing maxTemp...");
         setMaxTemp(newMaxTemp);
       })
       .catch(function (error) {
-        console.log("Erro ao incrementar a temperatura máxima:\n" + error);
-      });
-
-    if (maxTemp == 23) {
-      setMaxTempIncButtonColor("gray");
-    } else {
-      setMaxTempIncButtonColor("#454ADE");
-    }
-
-    if (maxTemp > 16 && maxTemp <= 22) {
-      setMaxTempDecButtonColor("#454ADE");
+        console.log("Error while increasing maxTemp\n " + error);
+      });      
     }
   }
 
-  function handleDecreaseCurrentTemp() {
+  function handleDecreaseCurrentTemp(updating) {
 
-    // Get current data
-    getSensorData();
+    if(!updating){
 
-    const headers = {
-      'Content-Type': 'application/json; charset=utf-8',
-      'x-access-token': session_token,
-    }
-
-    var newCurrTemp = currentTemp - 1;
-
-    api.post('api/ar/2/24', {
-      "0": 32,
-      "4": newCurrTemp,
-      "23": 12345
-    }, { headers })
+      api.get('/api/ar/2/24', {
+        headers: {
+          'x-access-token': session_token
+        }
+      })
       .then(function (response) {
-        console.log("Decrementando temperatura atual. Resposta do servidor\n " + response);
-        setCurrentTemp(newCurrTemp);
+        setCurrentTemp(response.data["temp_atual"]);
       })
       .catch(function (error) {
-        console.log("Erro ao decrementar a temperatura atual:\n" + error);
-      });
+        console.log("Could not load temp_atual information... Error:\n" + error);
+      })
+      .then(
+        updateData()
+      );
+    }
 
-    if (currentTemp == 16) {
-      setCurrentTempDecButtonColor("gray");
-    } else {
-      setCurrentTempDecButtonColor("#454ADE");
-      if (currentTemp < 23) {
-        setCurrentTempIncButtonColor("#454ADE");
+    if(updating){
+
+      if(deviceState == 'OFF'){
+        alert("Air-conditioner is off. Turn it on and try again...");
+        return;
+      } else if (currentTemp == 16) {
+        alert("Can't decrease more...");
+        return;
       }
-    }
-  }
+      
+      var newCurrTemp = currentTemp - 1;
 
-  function handleIncreaseCurrentTemp() {
-
-    // Get current data
-    getSensorData();
-
-    const headers = {
-      'Content-Type': 'application/json; charset=utf-8',
-      'x-access-token': session_token,
-    }
-
-    var newCurrTemp = currentTemp + 1;
-
-    api.post('api/ar/2/24', {
-      "0": 32,
-      "4": newCurrTemp,
-      "23": 12345
-    }, { headers })
+      api.post('/api/ar/2/24', {
+        "0": 32,
+        "4": newCurrTemp,
+        "23": 994999
+      }, {
+        headers: {
+          'x-access-token': session_token
+        }
+      })
       .then(function (response) {
-        console.log("Incrementando temperatura atual. Resposta do servidor\n " + response);
+        console.log("Decreasing currentTemp...");
         setCurrentTemp(newCurrTemp);
       })
       .catch(function (error) {
-        console.log("Erro ao incrementar a temperatura atual:\n" + error);
-      });
+        console.log("Error while decreasing currentTemp\n " + error);
+      });      
+    }
+  }
 
-    if (currentTemp == 23) {
-      setCurrentTempIncButtonColor("gray");
-    } else {
-      setCurrentTempIncButtonColor("#454ADE");
+  function handleIncreaseCurrentTemp(updating) {
+
+    if(!updating){
+
+      api.get('/api/ar/2/24', {
+        headers: {
+          'x-access-token': session_token
+        }
+      })
+      .then(function (response) {      
+        setCurrentTemp(response.data["temp_atual"]);        
+      })
+      .catch(function (error) {
+        console.log("Could not load air-conditioner data... Error:\n" + error);
+      });
     }
 
-    if (currentTemp > 16) {
-      setCurrentTempDecButtonColor("#454ADE");
+    if(updating){
+
+      if(deviceState == 'OFF'){
+        alert("Air-conditioner is off. Turn it on and try again...");
+        return;
+      } else if (currentTemp == 23) {
+        alert("Can't increase more...");
+        return;
+      }
+
+      var newCurrTemp = currentTemp + 1;
+
+      api.post('/api/ar/2/24', {
+        "0": 32,
+        "4": newCurrTemp,
+        "23": 994999
+      }, {
+        headers: {
+          'x-access-token': session_token
+        }
+      })
+      .then(function (response) {
+        console.log("Increasing currentTemp...");
+        setCurrentTemp(newCurrTemp);
+      })
+      .catch(function (error) {
+        console.log("Error while increasing currentTemp\n " + error);
+      });      
+    }
+  }
+
+  function handleNoPeople(updating){
+
+    if(!updating){
+
+      api.get('/api/ar/2/24', {
+        headers: {
+          'Content-Type': 'application/json; charset=utf-8',
+          'x-access-token': session_token
+        }
+      })
+      .then(function (response) {
+  
+        if(response.data["status_sala"] == true && noPeople != "ON"){
+          setNoPeople("ON");
+        } else if(response.data["status_sala"] == false && noPeople != "OFF"){
+          setNoPeople("OFF");          
+        }
+      })
+      .catch(function (error) {
+        console.log("Could not load air-conditioner data... Error:\n" + error);
+      })
+      .then(
+        updateData()
+      );
+    }
+
+    if(updating){
+
+      if(deviceState == 'OFF'){
+        alert("Air-conditioner is off. Turn it on and try again...");
+        return;
+      }
+
+      var newNoPeople;
+
+      if(noPeople == 'OFF'){
+        newNoPeople = 1;
+      }
+      else{
+        newNoPeople = 0;
+      }
+
+      api.post('/api/ar/2/24', {
+        "0": 2,
+        "22": newNoPeople,
+        "23": 992299
+      }, {
+        headers: {
+          'x-access-token': session_token
+        }
+      })
+      .then(function (response) {
+
+        console.log("Updating air-conditioner state when room is empty...");
+
+        if(newNoPeople == 0){
+          setNoPeople('OFF');
+        } else{
+          setNoPeople('ON');
+        }
+      })
+      .catch(function (error) {
+        console.log("Error while updating air-conditioner state when room is empty:\n " + error);
+      }).then(
+        updateData()
+      );      
     }
   }
 
@@ -446,12 +600,12 @@ const AirFocused = (props) => {
         </View>
         <View style={styles.boxbuttons}>
           <NewButton
-            onPress={handleSetState}
+            onPress={() => handleSetState(true)}
             width={100}
             height={50}
             bgColor={"#454ADE"}
             bRadius={10}
-            title={deviceStateButtonText}
+            title={(deviceState == 'ON') ? 'TURN OFF' : 'TURN ON'}
             txtColor="white"
             txtSize={13}
             marginTop={"16%"}
@@ -470,22 +624,22 @@ const AirFocused = (props) => {
                 resizeMode: "contain",
                 width: 50,
                 height: 45,
-                tintColor: iconsColor,
+                tintColor: "white",
               }}
             />
           </View>
           <View style={{ flexDirection: "column", flex: 0.65 }}>
-            <Text style={[styles.state, textColor]}>MIN TEMP.:</Text>
+            <Text style={[styles.state, "white"]}>MIN TEMP.:</Text>
             <Text style={styles.stateMode}>{minTemp}ºC</Text>
           </View>
         </View>
         <View style={styles.boxbuttons}>
           <View style={styles.doublebutton}>
             <CircularButton
-              onPress={handleIncreaseMinTemp}
+              onPress={() => handleIncreaseMinTemp(true)}
               width={45}
               height={45}
-              bgColor={minTempIncButtonColor}
+              bgColor={"#454ADE"}
               bRadius={100}
               title="+"
               txtColor="white"
@@ -493,10 +647,10 @@ const AirFocused = (props) => {
               marginTop={"5%"}
             />
             <CircularButton
-              onPress={handleDecreaseMinTemp}
+              onPress={() => handleDecreaseMinTemp(true)}
               width={45}
               height={45}
-              bgColor={minTempDecButtonColor}
+              bgColor={"#454ADE"}
               bRadius={100}
               title="-"
               txtColor="white"
@@ -518,22 +672,22 @@ const AirFocused = (props) => {
                 resizeMode: "contain",
                 width: 50,
                 height: 45,
-                tintColor: iconsColor,
+                tintColor: "white",
               }}
             />
           </View>
           <View style={{ flexDirection: "column", flex: 0.65 }}>
-            <Text style={[styles.state, textColor]}>MAX TEMP.:</Text>
+            <Text style={[styles.state, "white"]}>MAX TEMP.:</Text>
             <Text style={styles.stateMode}>{maxTemp}ºC</Text>
           </View>
         </View>
         <View style={styles.boxbuttons}>
           <View style={styles.doublebutton}>
             <CircularButton
-              onPress={handleIncreaseMaxTemp}
+              onPress={() => handleIncreaseMaxTemp(true)}
               width={45}
               height={45}
-              bgColor={maxTempIncButtonColor}
+              bgColor={"#454ADE"}
               bRadius={100}
               title="+"
               txtColor="white"
@@ -541,10 +695,10 @@ const AirFocused = (props) => {
               marginTop={"5%"}
             />
             <CircularButton
-              onPress={handleDecreaseMaxTemp}
+              onPress={() => handleDecreaseMaxTemp(true)}
               width={45}
               height={45}
-              bgColor={maxTempDecButtonColor}
+              bgColor={"#454ADE"}
               bRadius={100}
               title="-"
               txtColor="white"
@@ -566,22 +720,22 @@ const AirFocused = (props) => {
                 resizeMode: "contain",
                 width: 50,
                 height: 45,
-                tintColor: iconsColor,
+                tintColor: "white",
               }}
             />
           </View>
           <View style={{ flexDirection: "column", flex: 0.65 }}>
-            <Text style={[styles.state, textColor]}>TEMP. NOW:</Text>
+            <Text style={[styles.state, "white"]}>TEMP. NOW:</Text>
             <Text style={styles.stateMode}>{currentTemp}ºC</Text>
           </View>
         </View>
         <View style={styles.boxbuttons}>
           <View style={styles.doublebutton}>
             <CircularButton
-              onPress={handleIncreaseCurrentTemp}
+              onPress={() => handleIncreaseCurrentTemp(true)}
               width={45}
               height={45}
-              bgColor={currentTempIncButtonColor}
+              bgColor={"#454ADE"}
               bRadius={100}
               title="+"
               txtColor="white"
@@ -589,10 +743,10 @@ const AirFocused = (props) => {
               marginTop={"5%"}
             />
             <CircularButton
-              onPress={handleDecreaseCurrentTemp}
+              onPress={() => handleDecreaseCurrentTemp(true)}
               width={45}
               height={45}
-              bgColor={currentTempDecButtonColor}
+              bgColor={"#454ADE"}
               bRadius={100}
               title="-"
               txtColor="white"
@@ -614,23 +768,23 @@ const AirFocused = (props) => {
                 resizeMode: "contain",
                 width: 50,
                 height: 45,
-                tintColor: iconsColor,
+                tintColor: "white",
               }}
             />
           </View>
           <View style={{ flexDirection: "column", flex: 0.65 }}>
-            <Text style={[styles.state, textColor]}>W/ NOBODY:</Text>
+            <Text style={[styles.state, "white"]}>W/ NOBODY:</Text>
             <Text style={styles.stateMode}>{noPeople}</Text>
           </View>
         </View>
         <View style={styles.boxbuttons}>
           <NewButton
-            onPress={handleNoPeople}
+            onPress={() => handleNoPeople(true)}
             width={100}
             height={50}
-            bgColor={noPeopleButtonColor}
+            bgColor={"#454ADE"}
             bRadius={10}
-            title={noPeopleButtonText}
+            title={(noPeople == 'ON') ? 'TURN OFF' : 'TURN ON'}
             txtColor="white"
             txtSize={13}
             marginTop={"16%"}
@@ -639,10 +793,6 @@ const AirFocused = (props) => {
       </View>
 
       <View style={styles.cardSixthIcon}>
-        {/* <View style={{ flexDirection: "column", flex: 0.65 }}>
-          <Text style={[styles.lastUpdateText, textColor]}>Last update:</Text>
-          <Text style={styles.stateMode}>{}</Text>
-        </View> */}
         <NewButton
           width={100}
           height={50}
@@ -652,7 +802,7 @@ const AirFocused = (props) => {
           txtColor="white"
           txtSize={13}
           marginTop={"16%"}
-          onPress={getSensorData}
+          onPress={updateData}
         ></NewButton>
       </View>
     </View>
