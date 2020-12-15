@@ -61,7 +61,7 @@ const Homescreen = ({ navigation }) => {
 
     api.post('api/auth/login', {
       "user": "iot",
-      "password": "GI%G*q&NvZA&67xTbnugoY"
+      "password": "suasenhaaqui"
     }, {
       headers
     })
