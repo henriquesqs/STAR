@@ -1,7 +1,7 @@
 ![](https://i.imgur.com/jouKPkd.png)
 
 # IOT App project
-Interface to control some air-conditioner functions via a REST API connected to a MQTT Broker. You can check the api [here](https://github.com/andrebpradof/IoT).
+Interface to control some air-conditioner functions via a REST API connected to a MQTT Broker. You can check the api [here](https://github.com/andrebpradof/IoT) and the whole application [here](https://github.com/andrebpradof/SSC0952-IoT-Time-2).
 
 ## Notes
 This app was **only tested on some android devices**.
